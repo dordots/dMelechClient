@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as GoogleMaps from "google-maps"
 
 /**
@@ -8,21 +8,60 @@ import * as GoogleMaps from "google-maps"
   selector: 'map',
   templateUrl: 'map.html'
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements OnInit, OnChanges {
 
+  @Input("objects") objects: { location: google.maps.LatLngLiteral }[] = [];
   @ViewChild('map') mapElement: ElementRef;
-  map: any;
 
+  markers: google.maps.Marker[] = [];
+  mapObject: google.maps.Map;
+  googleMapsAPI: GoogleMaps.google;
+  
   constructor() {
   }
 
-  ngAfterViewInit(){
-    this.loadMap();
+  ngOnInit(){
+    this.loadMap(() => this.displayCurentObjects());
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if (changes['objects'] && !changes['objects'].firstChange) {
+      this.displayCurentObjects();
+    }
+  }
+
+  displayCurentObjects() {
+    this.removeAllMarkers();
+    this.setMarkersForObjects();
+  }
+
+  setMarkersForObjects() {
+    GoogleMaps.load(google => {
+      this.objects.forEach(object => {
+
+      let marker = new google.maps.Marker({
+        position: object.location,
+        map: this.mapObject
+      });
+      
+      this.markers.push(marker);
+    });
+  });
+  }
+
+  removeAllMarkers() {
+    this.setMapOnAllMarkers(null);
+    this.markers = [];
+  }
+
+  setMapOnAllMarkers(map: google.maps.Map) {
+    this.markers.forEach(marker => {
+      marker.setMap(this.mapObject);
+    })
   }
  
-  loadMap(){
+  loadMap(onMapLoadCallback: Function){
     GoogleMaps.load(google => {
-        
       let latLng = new google.maps.LatLng(31.778018, 35.235324);
   
       let mapOptions: google.maps.MapOptions = {
@@ -32,7 +71,9 @@ export class MapComponent implements AfterViewInit {
         disableDefaultUI: true
       }
   
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      this.mapObject = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+      onMapLoadCallback();
     })
   }
 }
