@@ -27,7 +27,7 @@ export class HomePage {
       let mapOptions: google.maps.MapOptions = {
         center: latLng,
         zoom: 16,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
         disableDefaultUI: true
       }
   
