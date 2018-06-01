@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as GoogleMaps from "google-maps"
+import GoogleMapsLoader from 'google-maps';
 
 /**
  * A map containing and managing component.
@@ -18,6 +19,7 @@ export class MapComponent implements OnInit, OnChanges {
   googleMapsAPI: GoogleMaps.google;
   
   constructor() {
+    GoogleMapsLoader.KEY = 'AIzaSyBCptJVdxT9qytWXFkm4cVfXa6qdDWOncI';
   }
 
   ngOnInit(){
@@ -68,9 +70,11 @@ export class MapComponent implements OnInit, OnChanges {
         center: latLng,
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.TERRAIN,
-        disableDefaultUI: true
+        disableDefaultUI: true,
+        key: '32dsfsad'
       }
-  
+
+ 
       this.mapObject = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
       onMapLoadCallback();
