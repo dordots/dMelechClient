@@ -70,8 +70,7 @@ export class MapComponent implements OnInit, OnChanges {
         center: latLng,
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.TERRAIN,
-        disableDefaultUI: true,
-        key: '32dsfsad'
+        disableDefaultUI: true
       }
 
  
