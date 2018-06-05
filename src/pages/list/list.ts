@@ -11,7 +11,7 @@ export class ListPage {
   soonMinyanTime: string;
   soonMinyanType: string;
   lastUpdatedTime: string;
-  distance: string;
+  distanceString: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     let TfilaTime = new Date('June 05, 2018 19:24:00');
@@ -20,6 +20,6 @@ export class ListPage {
     this.soonMinyanTime = TfilaTime.getHours() + ':' +TfilaTime.getMinutes();
     this.soonMinyanType = 'ערבית';
     this.lastUpdatedTime = 'לפני 2 ימים';
-    this.distance = '300 מטרים';
+    this.distanceString = '300 מטרים';
    }
 }
