@@ -8,16 +8,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <!-- <ion-icon [name]="item.icon" item-start></ion-icon> -->
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  <ion-card   *ngFor="let synagogue of SynagogueList">
+  <ion-card-content>
+    <ion-row>
+    <ion-card-title>
+      {{synagogue.synagogueName}}
+     </ion-card-title>
+    </ion-row>
+      <p>
+        תפילת {{synagogue.soonMinyanType}}
+        תחל בשעה: {{synagogue.soonMinyanTime}}
+      </p>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="clock"></ion-icon>
+            <div>{{synagogue.lastUpdatedTime}}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="map"></ion-icon>
+            <div>{{synagogue.distanceString}}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="navigate"></ion-icon>
+              <div>נווט</div>
+            </button>
+          </ion-col>
+  </ion-card-content>
+</ion-card>
 </ion-content>

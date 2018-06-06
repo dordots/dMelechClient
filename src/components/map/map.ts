@@ -1,6 +1,8 @@
+import { Geolocation } from '@ionic-native/geolocation';
 import { Component, ViewChild, ElementRef, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as GoogleMaps from "google-maps"
 import GoogleMapsLoader from 'google-maps';
+import { ILocation } from '../../models/Location';
 
 /**
  * A map containing and managing component.
@@ -11,7 +13,8 @@ import GoogleMapsLoader from 'google-maps';
 })
 export class MapComponent implements OnInit, OnChanges {
 
-  @Input("objects") objects: { location: google.maps.LatLngLiteral }[] = [];
+  @Input("objects") objects: { location: ILocation }[] = [];
+  @Input("centerPosition") centerPosition: ILocation;
   @ViewChild('map') mapElement: ElementRef;
 
   markers: google.maps.Marker[] = [];
@@ -23,12 +26,25 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
-    this.loadMap(() => this.displayCurentObjects());
+    this.loadMap(() => {
+      this.displayCurentObjects();
+      this.goToPosition(this.centerPosition);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges){
     if (changes['objects'] && !changes['objects'].firstChange) {
       this.displayCurentObjects();
+    }
+    
+    if (changes['centerPosition'] && changes['centerPosition'].currentValue) {
+      this.goToPosition(this.centerPosition);
+    }
+  }
+
+  goToPosition(pos: google.maps.LatLngLiteral) {
+    if (this.mapObject) {
+      this.mapObject.setCenter(pos);
     }
   }
 
@@ -64,10 +80,9 @@ export class MapComponent implements OnInit, OnChanges {
  
   loadMap(onMapLoadCallback: Function){
     GoogleMaps.load(google => {
-      let latLng = new google.maps.LatLng(31.778018, 35.235324);
   
       let mapOptions: google.maps.MapOptions = {
-        center: latLng,
+        center: this.centerPosition,
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.TERRAIN,
         disableDefaultUI: true
