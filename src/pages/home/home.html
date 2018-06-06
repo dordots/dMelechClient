@@ -6,6 +6,7 @@
 
 <ion-content class="no-scroll">
   <map *ngIf="map_mode" [objects]="objects" [centerPosition]="centerPosition"></map>
+  <list-view *ngIf="!map_mode"></list-view>
   <ion-searchbar placeholder="חיפוש" class="floating-searchbar"></ion-searchbar>
   <ion-fab right bottom>
     <button ion-fab mini (click)="toggle_view_options()">
