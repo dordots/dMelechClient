@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef, OnInit, Input, OnChanges, SimpleChang
 import * as GoogleMaps from "google-maps"
 import GoogleMapsLoader from 'google-maps';
 import { ILocation } from '../../models/Location';
+import { ICoordinates } from '../../models/Coordinates';
+import { ActionSheetController } from 'ionic-angular';
 
 /**
  * A map containing and managing component.
@@ -13,15 +15,16 @@ import { ILocation } from '../../models/Location';
 export class MapComponent implements OnInit, OnChanges {
 
   @Input("objects") objects: { location: ILocation }[] = [];
-  @Input("centerPosition") centerPosition: ILocation;
   @Output() onCurrentPositionRequest = new EventEmitter();
+  @Input("locations") locations: ILocation[] = [];
+  @Input("centerPosition") centerPosition: ICoordinates;
   @ViewChild('map') mapElement: ElementRef;
 
   markers: google.maps.Marker[] = [];
   mapObject: google.maps.Map;
   googleMapsAPI: GoogleMaps.google;
   
-  constructor() {
+  constructor(public actionSheetCtrl: ActionSheetController) {
     GoogleMapsLoader.KEY = 'AIzaSyBCptJVdxT9qytWXFkm4cVfXa6qdDWOncI';
   }
 
@@ -37,7 +40,7 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges){
-    if (changes['objects'] && !changes['objects'].firstChange) {
+    if (changes['locations'] && !changes['locations'].firstChange) {
       this.displayCurentObjects();
     }
     
@@ -46,7 +49,7 @@ export class MapComponent implements OnInit, OnChanges {
     }
   }
 
-  goToPosition(pos: google.maps.LatLngLiteral) {
+  goToPosition(pos: ICoordinates) {
     if (this.mapObject) {
       this.mapObject.panTo(pos);
     }
@@ -59,16 +62,33 @@ export class MapComponent implements OnInit, OnChanges {
 
   setMarkersForObjects() {
     GoogleMaps.load(google => {
-      this.objects.forEach(object => {
+      this.locations.forEach(location => {
 
       let marker = new google.maps.Marker({
-        position: object.location,
+        icon: `assets/imgs/${location.type}.png`,
+        position: location.coordinates,
         map: this.mapObject
       });
-      
+      marker.addListener('click', () => {
+        this.openLocationDisplay(location)
+      })
       this.markers.push(marker);
     });
   });
+  }
+
+  openLocationDisplay = (location: ILocation) => {
+    this.actionSheetCtrl.create({
+      title: location.name,
+      buttons: [
+        {
+          text: "עדכון"
+        },
+        {
+          text: "ניווט"
+        }
+      ]
+    }).present();
   }
 
   removeAllMarkers() {

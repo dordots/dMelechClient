@@ -5,6 +5,13 @@
 </ion-fab>
 
 <ion-content class="no-scroll">
-  <map [objects]="objects" [centerPosition]="centerPosition" (onCurrentPositionRequest)="getCurrentPosition()"></map>
+  <map *ngIf="mapMode" [locations]="locations" [centerPosition]="centerPosition" (onCurrentPositionRequest)="getCurrentPosition()"></map>
+  <list-view *ngIf="!mapMode"></list-view>
   <ion-searchbar placeholder="חיפוש" class="floating-searchbar"></ion-searchbar>
+  <ion-fab right bottom>
+    <button ion-fab mini (click)="toggle_view_options()">
+      <ion-icon *ngIf="mapMode" name="list"></ion-icon>      
+      <ion-icon *ngIf="!mapMode" name="map"></ion-icon>      
+    </button>
+  </ion-fab>
 </ion-content>

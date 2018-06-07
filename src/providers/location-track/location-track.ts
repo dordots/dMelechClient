@@ -1,6 +1,6 @@
+import { ICoordinates } from './../../models/Coordinates';
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { ILocation } from '../../models/Location';
 
 /*
   Provides info about the location of the current device.
@@ -12,13 +12,13 @@ export class LocationTrackProvider {
 
   }
 
-  getCurrentPosition(): Promise<ILocation> {
+  getCurrentPosition(): Promise<ICoordinates> {
     return this.geolocation.getCurrentPosition().then(position => {
-      let location: ILocation = {
+      let coordinates: ICoordinates = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
-      return location;
+      return coordinates;
     });
   }
 }

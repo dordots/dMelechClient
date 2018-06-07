@@ -1,0 +1,39 @@
+
+<ion-content >
+  <ion-navbar>
+    <ion-title align="center">רשימת בתי כנסת</ion-title>
+  </ion-navbar>
+  <ion-navbar>
+  </ion-navbar>
+  <ion-card *ngFor="let synagogue of SynagogueList">
+    <ion-card-content >
+      <ion-row >
+        <ion-card-title>
+        {{synagogue.synagogueName}}
+        </ion-card-title>
+      </ion-row>
+      <p>
+        תפילת {{synagogue.soonMinyanType}}
+        תחל בשעה: {{synagogue.soonMinyanTime}}
+      </p>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="clock"></ion-icon>
+          <div>{{synagogue.lastUpdatedTime}}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="map"></ion-icon>
+          <div>{{synagogue.distanceString}}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="navigate"></ion-icon>
+          <div>נווט</div>
+        </button>
+      </ion-col>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

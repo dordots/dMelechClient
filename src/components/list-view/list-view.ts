@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicModule } from 'ionic-angular';
 
 enum TfilaType {
   MORNING = 'שחרית',
@@ -8,15 +8,18 @@ enum TfilaType {
 };
 
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+  selector: 'list-view',
+  templateUrl: 'list-view.html'
 })
 
-export class ListPage {
-  SynagogueList: any;
+export class ListViewComponent {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-   
+  SynagogueList: any;
+  text: string;
+
+  constructor() {
+    console.log('Hello ListViewComponent Component');
+    this.text = "hello world!!!"
     this.SynagogueList = [{
       synagogueName: 'אוהל משה',
       soonMinyanType: TfilaType.EVENING,
@@ -38,5 +41,6 @@ export class ListPage {
       lastUpdatedTime: 'לפני 8 ימים',
       distanceString: '200 מטרים'
     }];
-   }
+  }
+
 }
