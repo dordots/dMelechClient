@@ -19,4 +19,9 @@ export class HomePage {
       { location: { lat: 31.775367, lng: 35.231167 } }
     ]
   }
+
+  getCurrentPosition() {
+
+    this.centerPosition = { lat: 31.6000, lng: 35.234514 };
+  }
 }

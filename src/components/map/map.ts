@@ -1,5 +1,4 @@
-import { Geolocation } from '@ionic-native/geolocation';
-import { Component, ViewChild, ElementRef, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import * as GoogleMaps from "google-maps"
 import GoogleMapsLoader from 'google-maps';
 import { ILocation } from '../../models/Location';
@@ -15,6 +14,7 @@ export class MapComponent implements OnInit, OnChanges {
 
   @Input("objects") objects: { location: ILocation }[] = [];
   @Input("centerPosition") centerPosition: ILocation;
+  @Output() onCurrentPositionRequest = new EventEmitter();
   @ViewChild('map') mapElement: ElementRef;
 
   markers: google.maps.Marker[] = [];
@@ -23,6 +23,10 @@ export class MapComponent implements OnInit, OnChanges {
   
   constructor() {
     GoogleMapsLoader.KEY = 'AIzaSyBCptJVdxT9qytWXFkm4cVfXa6qdDWOncI';
+  }
+
+  getCurrentPosition() {
+    this.onCurrentPositionRequest.emit();
   }
 
   ngOnInit(){
@@ -44,7 +48,7 @@ export class MapComponent implements OnInit, OnChanges {
 
   goToPosition(pos: google.maps.LatLngLiteral) {
     if (this.mapObject) {
-      this.mapObject.setCenter(pos);
+      this.mapObject.panTo(pos);
     }
   }
 
