@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
+import { DatesToStringProvider } from '../../providers/dates-to-string/dates-to-string'
 
 enum TfilaType {
   MORNING = 'שחרית',
@@ -15,18 +16,15 @@ enum TfilaType {
 export class ListViewComponent {
   SynagogueList: any;
 
-  constructor() {
-    var oneDay = 86400000; 
-    let dateOfMinyan = new Date('December 17, 1995 03:24:00');
-    let dateTimeNow = new Date('June 08, 2018 03:24:00');
+  constructor(public datesToString: DatesToStringProvider) {
+     
+    let dateOfMinyan = new Date('June 8, 2018 03:24:00');
 
-    let diffDays = Math.round(Math.abs((dateOfMinyan.getTime() - dateTimeNow.getTime())/(oneDay)));
-    
     this.SynagogueList = [{
       synagogueName: 'אוהל משה',
       soonMinyanType: TfilaType.EVENING,
       soonMinyanTime: '19:30',
-      lastUpdatedTime: 'לפני 2 ימים',
+      lastUpdatedTime: datesToString.getDatesString(dateOfMinyan),
       distanceString: '300 מטרים'
     },
     {
@@ -86,5 +84,6 @@ export class ListViewComponent {
       distanceString: '200 מטרים'
     }];
   }
+
 
 }

@@ -11,6 +11,7 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocationTrackProvider } from '../providers/location-track/location-track';
+import { DatesToStringProvider } from '../providers/dates-to-string/dates-to-string';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LocationTrackProvider } from '../providers/location-track/location-trac
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LocationTrackProvider
+    LocationTrackProvider,
+    DatesToStringProvider
   ]
 })
 export class AppModule {}
