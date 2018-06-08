@@ -1,11 +1,12 @@
 page-home {
       .floating-searchbar {
         position: absolute; 
-        top: 50px; 
+        top: 0px; 
         z-index: 99;
       }
 
       .searchbar-md .searchbar-input {
           direction: rtl;
+          border-radius: 20px;
       }
 }
