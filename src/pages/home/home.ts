@@ -1,8 +1,8 @@
+import { LocationTrackProvider } from './../../providers/location-track/location-track';
 import { ISynagogue, IMikve, IYeshiva } from './../../models/Location';
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { ILocation } from "../../models/Location";
-import { IEvent } from "../../models/Event";
 import { ICoordinates } from "../../models/Coordinates";
 
 @Component({
@@ -13,10 +13,15 @@ import { ICoordinates } from "../../models/Coordinates";
 export class HomePage {
   mapMode : boolean = true;
   locations: ILocation[] = [];
-  centerPosition: ICoordinates;
+  centerCoordinates: ICoordinates;
 
-  constructor(public navCtrl: NavController) {
-    this.centerPosition = { lat: 31.776725, lng: 35.234514 };
+  constructor(public navCtrl: NavController,
+              public locationTrack: LocationTrackProvider) {
+
+    // Temple mount fallback coordinates
+    this.centerCoordinates = { lat: 31.776725, lng: 35.234514 };
+    this.getCurrentCoordinates();
+
     this.locations = [
       {
         id: '213-asd',
@@ -66,8 +71,10 @@ export class HomePage {
     this.mapMode = !this.mapMode;
   }
 
-  getCurrentPosition() {
+  getCurrentCoordinates() {
 
-    this.centerPosition = { lat: 31.6000, lng: 35.234514 };
+    this.locationTrack.getCurrentCoordinates()
+      .then(coords => this.centerCoordinates = coords)
+      .catch(err => console.log(`err: ${err}`));
   }
 }

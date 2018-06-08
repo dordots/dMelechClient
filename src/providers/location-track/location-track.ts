@@ -9,7 +9,7 @@ import { Geolocation } from "@ionic-native/geolocation";
 export class LocationTrackProvider {
   constructor(public geolocation: Geolocation) {}
 
-  getCurrentPosition(): Promise<ICoordinates> {
+  getCurrentCoordinates(): Promise<ICoordinates> {
     return this.geolocation.getCurrentPosition().then(position => {
       let coordinates: ICoordinates = {
         lat: position.coords.latitude,
