@@ -1,17 +1,22 @@
+import { ILocationsQuery, IEventsQuery } from './../../interfaces/SearchQueries';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
-  Generated class for the SearchProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
+  Handling search queries.
 */
 @Injectable()
 export class SearchProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello SearchProvider Provider');
+  constructor() {
+  }
+
+  searchLocations(query: ILocationsQuery) {
+
+  }
+
+  searchEvents(query: IEventsQuery) {
+    
   }
 
 }
