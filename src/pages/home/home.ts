@@ -5,6 +5,7 @@ import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { ILocation } from "../../models/Location";
 import { ICoordinates } from "../../models/Coordinates";
+import { LogglyService } from 'ngx-loggly-logger';
 
 @Component({
   selector: "page-home",
@@ -18,7 +19,8 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public locationTrack: LocationTrackProvider,
-    private errorHandler: ErrorHandlerProvider
+    private errorHandler: ErrorHandlerProvider,
+    private _logglyService: LogglyService 
   ) {
     this.getCurrentCoordinates();
 
@@ -69,6 +71,14 @@ export class HomePage {
   }
   toggle_view_options() {
     this.mapMode = !this.mapMode;
+    this._logglyService.push({
+      logglyKey: '254fa38f-f381-47b6-afa4-776e5f61f1f2',
+      sendConsoleErrors : true, // Optional set true to send uncaught console errors
+      tag : 'angular'
+  });
+   
+     // To send logs to loggly
+  this._logglyService.push('check it');
   }
 
   getCurrentCoordinates() {

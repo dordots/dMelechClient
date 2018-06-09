@@ -14,6 +14,8 @@ import { LocationTrackProvider } from '../providers/location-track/location-trac
 import { ToastProvider } from '../providers/toast/toast';
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler';
 import { MapManagerProvider } from '../providers/map-manger/map-manger';
+import { NgxLogglyModule } from 'ngx-loggly-logger';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { MapManagerProvider } from '../providers/map-manger/map-manger';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    ComponentsModule
+    ComponentsModule,
+    NgxLogglyModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
