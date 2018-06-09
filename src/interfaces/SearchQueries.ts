@@ -20,14 +20,16 @@ export interface ILocationsQuery extends ISearchQuery {
 export interface IEventsQuery extends ISearchQuery {
     byRadius?: RadiusQuery;
     geoBoundingBox?: IGeoBoundingBox;
-    searchTimeSpan: {
-        start: Date;
-        end: Date;
-    }
+    searchTimeSpan: TimeSpanQuery;
     text?: string;
 }
 
-type RadiusQuery = {
+export type RadiusQuery = {
     center: ICoordinates
     radius: number;
+}
+
+export type TimeSpanQuery = {
+    start: Date;
+    end: Date;
 }
