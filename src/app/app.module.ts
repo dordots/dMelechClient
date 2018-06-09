@@ -14,6 +14,7 @@ import { LocationTrackProvider } from '../providers/location-track/location-trac
 import { ToastProvider } from '../providers/toast/toast';
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler';
 import { MapManagerProvider } from '../providers/map-manger/map-manger';
+import { BackendApiProvider } from '../providers/backend-api/backend-api';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MapManagerProvider } from '../providers/map-manger/map-manger';
     LocationTrackProvider,
     ToastProvider,
     ErrorHandlerProvider,
-    MapManagerProvider
+    MapManagerProvider,
+    BackendApiProvider
   ]
 })
 export class AppModule {}
