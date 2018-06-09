@@ -15,11 +15,8 @@ enum TfilaType {
 export class ListViewComponent {
 
   SynagogueList: any;
-  text: string;
 
   constructor() {
-    console.log('Hello ListViewComponent Component');
-    this.text = "hello world!!!"
     this.SynagogueList = [{
       synagogueName: 'אוהל משה',
       soonMinyanType: TfilaType.EVENING,
