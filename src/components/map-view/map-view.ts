@@ -6,7 +6,8 @@ import {
   OnChanges,
   SimpleChanges,
   EventEmitter,
-  Output
+  Output,
+  AfterViewInit
 } from "@angular/core";
 import { ILocation } from "../../models/Location";
 import { ICoordinates } from "../../models/Coordinates";
@@ -19,7 +20,7 @@ import { MapManagerProvider } from "../../providers/map-manger/map-manger";
   selector: "map-view",
   templateUrl: "map-view.html"
 })
-export class MapViewComponent implements OnChanges {
+export class MapViewComponent implements OnChanges, AfterViewInit {
   @Input("locations") locations: ILocation[] = [];
   @Input("centerCoordinates") centerCoordinates: ICoordinates;
 
@@ -37,6 +38,13 @@ export class MapViewComponent implements OnChanges {
   };
 
   constructor(private mapManager: MapManagerProvider) {
+  }
+  
+  ngAfterViewInit() {
+    if (!this.centerCoordinates) {
+      // Temple mount fallback start point
+      this.goToCoordinates({ lat: 31.778139, lng: 35.235987 });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

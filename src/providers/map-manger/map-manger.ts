@@ -40,8 +40,12 @@ export class MapManagerProvider {
           disableDefaultUI: true,
           center: { lat: 31.776725, lng: 35.234514 }
         };
-        let map = new google.maps.Map(elementRef.nativeElement, mapOptions);
-        resolve(map);
+        if (elementRef.nativeElement.childElementCount == 0) {
+          resolve(new google.maps.Map(elementRef.nativeElement, mapOptions));
+        }
+        else {
+          resolve(null);
+        }
       });
     });
   }
