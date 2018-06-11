@@ -48,7 +48,8 @@ import { LoggingProvider } from '../providers/logging/logging';
     MapManagerProvider,
     BackendApiProvider,
     SearchProvider,
-    LoggingProvider
+    LoggingProvider,
+    SearchProvider
   ]
 })
 export class AppModule {}
