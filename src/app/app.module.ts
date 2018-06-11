@@ -45,7 +45,7 @@ import { SearchProvider } from '../providers/search/search';
     ToastProvider,
     ErrorHandlerProvider,
     MapManagerProvider,
-    BackendApiProvider
+    BackendApiProvider,
     SearchProvider
   ]
 })
