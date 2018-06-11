@@ -25,16 +25,16 @@ export class LoggingProvider {
 
   info( details: logDetails){
     details.type = 'info';
-    this._logglyService.push(JSON);
+    this._logglyService.push(details);
   }
 
   warning(details: logDetails){
     details.type = 'warning';
-    this._logglyService.push(JSON);
+    this._logglyService.push(details);
   }
   
   error(details: logDetails){
     details.type = 'error';
-    this._logglyService.push(JSON);
+    this._logglyService.push(details);
   }
 }
