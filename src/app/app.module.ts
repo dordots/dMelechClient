@@ -14,6 +14,7 @@ import { LocationTrackProvider } from '../providers/location-track/location-trac
 import { ToastProvider } from '../providers/toast/toast';
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler';
 import { MapManagerProvider } from '../providers/map-manger/map-manger';
+import { BackendApiProvider } from '../providers/backend-api/backend-api';
 import { SearchProvider } from '../providers/search/search';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { SearchProvider } from '../providers/search/search';
     ToastProvider,
     ErrorHandlerProvider,
     MapManagerProvider,
+    BackendApiProvider
     SearchProvider
   ]
 })

@@ -1,4 +1,5 @@
+export type EntityId = string;
 
 export interface IEntity {
-    id: string;
+    id: EntityId;
 }
