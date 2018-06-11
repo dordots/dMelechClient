@@ -17,6 +17,7 @@ import { MapManagerProvider } from '../providers/map-manger/map-manger';
 import { NgxLogglyModule } from 'ngx-loggly-logger';
 import { BackendApiProvider } from '../providers/backend-api/backend-api';
 import { SearchProvider } from '../providers/search/search';
+import { LoggingProvider } from '../providers/logging/logging';
 
 @NgModule({
   declarations: [
@@ -45,8 +46,9 @@ import { SearchProvider } from '../providers/search/search';
     ToastProvider,
     ErrorHandlerProvider,
     MapManagerProvider,
-    BackendApiProvider
-    SearchProvider
+    BackendApiProvider,
+    SearchProvider,
+    LoggingProvider
   ]
 })
 export class AppModule {}
