@@ -15,6 +15,7 @@ import { ToastProvider } from '../providers/toast/toast';
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler';
 import { MapManagerProvider } from '../providers/map-manger/map-manger';
 import { BackendApiProvider } from '../providers/backend-api/backend-api';
+import { SearchProvider } from '../providers/search/search';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { BackendApiProvider } from '../providers/backend-api/backend-api';
     ErrorHandlerProvider,
     MapManagerProvider,
     BackendApiProvider
+    SearchProvider
   ]
 })
 export class AppModule {}
