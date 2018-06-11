@@ -2,6 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LogglyService } from 'ngx-loggly-logger';
 
+interface logDetails {
+  type?: string;
+  action?: string;
+  info?: string;
+  string? : string;
+  [key: string]: string;
+}
 /*
   This service is for logging service.
 */
@@ -16,18 +23,18 @@ export class LoggingProvider {
   });
 }
 
-  info(JSON){
-    JSON.push({'type':'info'});
+  info( details: logDetails){
+    details.type = 'info';
     this._logglyService.push(JSON);
   }
 
-  warning(JSON){
-    JSON.push({'type':'warning'});
+  warning(details: logDetails){
+    details.type = 'warning';
     this._logglyService.push(JSON);
   }
   
-  error(JSON){
-    JSON.push({'type':'error'});
+  error(details: logDetails){
+    details.type = 'error';
     this._logglyService.push(JSON);
   }
 }
