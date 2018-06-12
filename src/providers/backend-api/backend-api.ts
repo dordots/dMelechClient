@@ -1,14 +1,13 @@
+import { ISearchQuery } from './../../interfaces/SearchQueries';
 import { IEvent } from './../../models/Event';
 import { ILocation } from './../../models/Location';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EntityId } from '../../models/Entity';
+import { IAdvancedQuery } from '../../interfaces/SearchQueries';
 
 /*
-  Generated class for the BackendApiProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
+  Handling communication with the server.
 */
 @Injectable()
 export class BackendApiProvider {
@@ -19,7 +18,7 @@ export class BackendApiProvider {
   }
 
   createLocation(location: ILocation) {
-    return this.http.put<ILocation>(`${this.baseAPIUrl}/locations/create`, location);
+    return this.http.post<ILocation>(`${this.baseAPIUrl}/locations`, location);
   }
 
   getLocation(locationId: EntityId) {
@@ -27,35 +26,19 @@ export class BackendApiProvider {
   }
 
   updateLocation(location: ILocation) {
-    return this.http.post<ILocation>(`${this.baseAPIUrl}/locations/${location.id}/update`, location)
+    return this.http.put<ILocation>(`${this.baseAPIUrl}/locations/${location.id}`, location)
   }
 
   deleteLocation(locationId: EntityId) {
-    return this.http.delete<ILocation>(`${this.baseAPIUrl}/locations/${locationId}/delete`);    
+    return this.http.delete<ILocation>(`${this.baseAPIUrl}/locations/${locationId}`);    
   }
 
-  searchLocations(query: any) {
-    return this.http.get<ILocation>(`${this.baseAPIUrl}/locations/search`, query);
-  }
-
-  createEvent(event: IEvent) {
-    return this.http.put<IEvent>(`${this.baseAPIUrl}/events/create`, event);
-  }
-
-  getEvent(eventId: EntityId) {
-    return this.http.get<IEvent>(`${this.baseAPIUrl}/events/${eventId}`);
-  }
-
-  updateEvent(event: IEvent) {
-    return this.http.post<IEvent>(`${this.baseAPIUrl}/events/${event.id}/update`, event);    
-  }
-
-  deleteEvent(eventId: EntityId) {
-    return this.http.delete<IEvent>(`${this.baseAPIUrl}/events/${eventId}/delete`);    
-  }
-
-  searchEvents(query: any) {
-    return this.http.get<IEvent>(`${this.baseAPIUrl}/events/search`, query);
+  searchLocations(query: ISearchQuery) {
+    return this.http.get<ILocation>(`${this.baseAPIUrl}/locations/search`, {
+      params: {
+        filter: JSON.stringify(query)
+      }
+    });
   }
 
 }

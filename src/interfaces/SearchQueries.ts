@@ -1,5 +1,6 @@
 import { ICoordinates } from './../models/Coordinates';
 import { IGeoBox } from './../models/GeoBox';
+import { ILocation } from '../models/Location';
 
 /** The main interface for search queries */
 export interface ISearchQuery {
@@ -21,10 +22,7 @@ export interface IAdvancedQuery extends ISearchQuery {
     text?: string;
 
     /** @prop Additional properties such as accessability etc. */
-    locationProperties?: { [key: string]: string | boolean };
-
-    /** @prop Additional properties such as accessability etc. */
-    eventProperties?: { [key: string]: string | boolean };
+    locationProperties?: ILocation;
 }
 
 export type RadiusQuery = {
