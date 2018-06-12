@@ -33,3 +33,7 @@ export interface ISynagogue extends ILocation {
 export interface IYeshiva extends ILocation {
     type: 'yeshiva'
 }
+
+export interface IMikve extends ILocation {
+    type: 'mikve'
+}
