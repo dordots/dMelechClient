@@ -6,6 +6,7 @@ import { NavController } from "ionic-angular";
 import { ILocation } from "../../models/Location";
 import { ICoordinates } from "../../models/Coordinates";
 import { LoggingProvider } from "../../providers/logging/logging"
+import { SearchPage } from "../search/search";
 
 @Component({
   selector: "page-home",
@@ -68,6 +69,15 @@ export class HomePage {
         type: "yeshiva"
       } as IYeshiva
     ];
+  }
+
+  handleStartSearch() {
+    this.navCtrl.push(SearchPage, {}, {
+      animation: 'transition',
+      animate: true,
+      duration: 500,
+      direction: 'forward'
+    })
   }
 
   toggle_view_options() {
