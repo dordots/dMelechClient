@@ -1,3 +1,4 @@
+import { SearchPage } from './../pages/search/search';
 import { ComponentsModule } from './../components/components.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -22,7 +23,8 @@ import { LoggingProvider } from '../providers/logging/logging';
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    SearchPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { LoggingProvider } from '../providers/logging/logging';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    SearchPage
   ],
   providers: [
     StatusBar,

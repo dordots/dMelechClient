@@ -69,6 +69,7 @@ export class HomePage {
       } as IYeshiva
     ];
   }
+
   toggle_view_options() {
     this.mapMode = !this.mapMode;
     this.logging.info({
