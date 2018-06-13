@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
-import { MapComponent } from './map/map';
 import { ListViewComponent } from './list-view/list-view';
+import { MapViewComponent } from './map-view/map-view';
 
 @NgModule({
-	declarations: [MapComponent,
+	declarations: [MapViewComponent,
     ListViewComponent],
 	imports: [IonicModule],
-	exports: [MapComponent,
+	exports: [MapViewComponent,
 	ListViewComponent]
 })
 export class ComponentsModule {}

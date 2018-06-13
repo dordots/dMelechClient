@@ -1,21 +1,35 @@
-import { ICoordinates } from "./../../models/Coordinates";
 import { Injectable } from "@angular/core";
-import { Geolocation } from "@ionic-native/geolocation";
+import { Geolocation, Geoposition } from "@ionic-native/geolocation";
+import { map } from "rxjs/operators";
+import { Observable } from "rxjs/Observable";
+import { ICoordinates } from "../../models/Coordinates";
 
 /*
-  Provides info about the location of the current device.
+  Tracking the location of the current device.
 */
 @Injectable()
 export class LocationTrackProvider {
-  constructor(public geolocation: Geolocation) {}
+  constructor(private geolocation: Geolocation) {}
 
   getCurrentCoordinates(): Promise<ICoordinates> {
-    return this.geolocation.getCurrentPosition().then(position => {
-      let coordinates: ICoordinates = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-      return coordinates;
-    });
+    return this.geolocation
+      .getCurrentPosition()
+      .then(this.positionToCoordinates);
+  }
+
+  getCurrentCoordinatesSub(): Observable<ICoordinates> {
+    return this.geolocation
+      .watchPosition({
+        enableHighAccuracy: true
+      })
+      .pipe(map(this.positionToCoordinates));
+  }
+
+  private positionToCoordinates(pos: Geoposition): ICoordinates {
+    let coords: ICoordinates = {
+      lat: pos.coords.latitude,
+      lng: pos.coords.longitude
+    };
+    return coords;
   }
 }

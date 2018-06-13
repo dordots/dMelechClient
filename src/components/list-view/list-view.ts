@@ -16,8 +16,7 @@ enum TfilaType {
 export class ListViewComponent {
   SynagogueList: any;
 
-  constructor(public datesToString: DatesToStringProvider) {
-     
+  constructor(public datesToString: DatesToStringProvider) {     
     let dateOfMinyan = new Date('June 8, 2018 03:24:00');
 
     this.SynagogueList = [{
