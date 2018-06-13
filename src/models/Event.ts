@@ -1,4 +1,3 @@
-import { ILocation } from './Location';
 import { IEntity } from "./Entity";
 
 export interface IEvent extends IEntity {
@@ -7,9 +6,6 @@ export interface IEvent extends IEntity {
     type: string;
     /** @prop Description text */
     description: string;
-
-    /** @prop The location the event should take place */
-    location: ILocation;
 
     /** @prop Boundaries of the time of the event */
     time: Time;

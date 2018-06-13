@@ -1,5 +1,6 @@
 import { IEntity } from './Entity';
 import { ICoordinates } from './Coordinates';
+import { IEvent } from './Event';
 
 export interface ILocation extends IEntity {
 
@@ -12,21 +13,27 @@ export interface ILocation extends IEntity {
     /** @prop The coordinates of the location */
     coordinates: ICoordinates;
 
+    /** @prop Additional properties about the location. */
+    additionalProperties: { [key: string]: string | number };
+
     /** @prop Is the location is active (not in shiputzim for example) */
     isActive?: boolean;
+
+    /** @prop Is the location is temporary (will not display without relevant events) */
+    isTemporary?: boolean;
+
+    /** @prop The events that associated with the location */
+    events: IEvent[];
 }
 
 export interface ISynagogue extends ILocation {
-
     type: 'synagogue'
 }
 
-export interface IMikve extends ILocation {
-    
-    type: 'mikve'
+export interface IYeshiva extends ILocation {
+    type: 'yeshiva'
 }
 
-export interface IYeshiva extends ILocation {
-    
-    type: 'yeshiva'
+export interface IMikve extends ILocation {
+    type: 'mikve'
 }
