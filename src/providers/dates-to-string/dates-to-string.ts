@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+/*
+* get Date and send back the count of the days that passed.
+*/
 @Injectable()
 export class DatesToStringProvider {
   constructor() {}
 
-  getDatesString( date: Date ): string {
-    var fullDateSeconds = 86400000;
-    let dateTimeNow = new Date('June 08, 2018 03:24:00');
-    let daysPassed = Math.round(Math.abs((date.getTime() - dateTimeNow.getTime())/(fullDateSeconds)));
+  getDatesString( date : Date ) : string {
+    let daysPassed = Math.round(Math.abs((Date.now()- date.getTime())/(86400000)));
   
     if(daysPassed > 20){
       return "עדכני נכון ל " + this.toStringDate(date) ;
