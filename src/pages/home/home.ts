@@ -15,8 +15,8 @@ import { SearchPage } from "../search/search";
 export class HomePage {
   mapMode: boolean = true;
   locations: ILocation[] = [];
-  centerCoordinates: ICoordinates;
-
+  centerCoordinates: ICoordinates;  
+ 
   constructor(
     public navCtrl: NavController,
     public locationTrack: LocationTrackProvider,
@@ -80,12 +80,16 @@ export class HomePage {
     })
   }
 
-  toggle_view_options() {
-    this.mapMode = !this.mapMode;
+  toggleToMap() {
+    this.mapMode = false;
     this.logging.info({
       'screen': "mapScreen",
       'action': "toggle between list to map button clicked"
     });
+  }
+
+  toggleToList(){
+    this.mapMode = true;
   }
 
   getCurrentCoordinates() {
