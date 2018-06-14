@@ -83,13 +83,17 @@ export class HomePage {
   toggleToMap() {
     this.mapMode = false;
     this.logging.info({
-      'screen': "mapScreen",
-      'action': "toggle between list to map button clicked"
+      'screen': "Home",
+      'action': "map view clicked"
     });
   }
 
   toggleToList(){
     this.mapMode = true;
+    this.logging.info({
+      'screen': "Home",
+      'action': "list view clicked"
+    });
   }
 
   getCurrentCoordinates() {
