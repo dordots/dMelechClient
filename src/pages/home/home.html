@@ -1,17 +1,12 @@
-<!-- <ion-fab>
-  <button ion-fab mini menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-</ion-fab> -->
-
 <ion-content class="no-scroll">
   <map-view *ngIf="mapMode" [locations]="locations" [centerCoordinates]="centerCoordinates" (onCurrentPositionRequest)="getCurrentCoordinates()"></map-view>
   <list-view *ngIf="!mapMode"></list-view>
   <ion-searchbar placeholder="חיפוש" class="floating-searchbar" (click)="handleStartSearch()"></ion-searchbar>
+
   <ion-fab right bottom>
-    <button ion-fab mini (click)="toggle_view_options()">
-      <ion-icon *ngIf="mapMode" name="list"></ion-icon>      
-      <ion-icon *ngIf="!mapMode" name="map"></ion-icon>      
+    <button ion-fab mini>      
+      <ion-icon name="add"></ion-icon>      
     </button>
   </ion-fab>
+
 </ion-content>
