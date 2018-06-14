@@ -17,10 +17,11 @@ export class MapComponent<T extends IMapItem> {
 
   @Output() onCurrCoordsRequest = new EventEmitter();
   @Output() onItemClicked = new EventEmitter<T>();
+  @Output() onMapClicked = new EventEmitter<ICoordinates>();
 
   @Input("items") items: T[] = [];
   @Input("centerCoords") centerCoords: ICoordinates;
-
+  
   @ViewChild("mapElement") mapElement: ElementRef;
 
   // The map instance
@@ -38,6 +39,8 @@ export class MapComponent<T extends IMapItem> {
 
 
   ngAfterViewInit() {
+    this.map.then(map => this.mapManager.setOnClickListener(map, this.onMapClicked))
+    
     if (!this.centerCoords) {
       // Temple mount fallback start point
       this.goToCoordinates({ lat: 31.778139, lng: 35.235987 });

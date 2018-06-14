@@ -3,6 +3,7 @@ import GoogleMaps from "google-maps";
 import { Injectable, ElementRef, EventEmitter } from "@angular/core";
 import { ActionSheetController } from "ionic-angular";
 import { ICoordinates } from "../../models/Coordinates";
+import { IMap } from '../../interfaces/Map';
 
 /*
   Creating and managing maps.
@@ -31,7 +32,7 @@ export class MapManagerProvider {
     GoogleMaps.KEY = "AIzaSyBCptJVdxT9qytWXFkm4cVfXa6qdDWOncI";
   }
 
-  public createMap(elementRef: ElementRef): Promise<google.maps.Map> {
+  public createMap(elementRef: ElementRef): Promise<IMap> {
     return new Promise((resolve, reject) => {
       this.googleAPI.then(googleAPI => {
         let mapOptions: google.maps.MapOptions = {
@@ -50,6 +51,14 @@ export class MapManagerProvider {
     });
   }
 
+  public setOnClickListener(map: IMap, eventEmitter: EventEmitter<ICoordinates>) {
+    map.addListener('click', (e: google.maps.MouseEvent) => {
+      let lat = e.latLng.lat();
+      let lng = e.latLng.lng();
+      eventEmitter.emit({ lat, lng });
+    })
+  }
+
   public setCenterCoords(
     map: google.maps.Map,
     coords: ICoordinates
@@ -57,20 +66,20 @@ export class MapManagerProvider {
     if (map && coords) map.panTo(coords);
   }
 
-  public setItems(map: google.maps.Map, items: Item[], eventEmitter: EventEmitter<Item>): void {
+  public setItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>): void {
     if (map && items) {
       this.removeAllMarkers(map);
       this.addMarkersForItems(map, items, eventEmitter);
     }
   }
 
-  private removeAllMarkers(map: google.maps.Map) {
+  private removeAllMarkers(map: IMap) {
     while (this.itemsMarkers.length) {
       this.itemsMarkers.pop().setMap(null);
     }
   }
 
-  private addMarkersForItems(map: google.maps.Map, items: Item[], eventEmitter: EventEmitter<Item>) {
+  private addMarkersForItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>) {
     this.googleAPI.then(googleAPI => {
       items.forEach(item => {
         let marker = new google.maps.Marker({
