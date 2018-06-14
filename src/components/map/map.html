@@ -1,4 +1,6 @@
-<!-- Generated template for the MapComponent component -->
-<div>
-  {{text}}
-</div>
+<div #mapElement id="mapElement"></div>
+<ion-fab (click)="onCurrCoordsRequest.emit()" left bottom>
+    <button ion-fab>
+        <ion-icon name="md-locate"></ion-icon>
+    </button>
+</ion-fab>

@@ -1,8 +1,9 @@
 import { IEntity } from './Entity';
 import { ICoordinates } from './Coordinates';
 import { IEvent } from './Event';
+import { IMapItem } from '../interfaces/MapItem';
 
-export interface ILocation extends IEntity {
+export interface ILocation extends IEntity, IMapItem {
 
     /** @prop The name of the location */
     name: string;
