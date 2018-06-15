@@ -1,8 +1,8 @@
 import { ErrorHandlerProvider } from "./../../providers/error-handler/error-handler";
 import { LocationTrackProvider } from "./../../providers/location-track/location-track";
 import { ISynagogue, IMikve, IYeshiva } from "./../../models/Location";
-import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { Component, Input, EventEmitter } from "@angular/core";
+import { NavController, ActionSheetController } from "ionic-angular";
 import { ILocation } from "../../models/Location";
 import { ICoordinates } from "../../models/Coordinates";
 import { LoggingProvider } from "../../providers/logging/logging"
@@ -20,7 +20,8 @@ export class HomePage {
     public navCtrl: NavController,
     public locationTrack: LocationTrackProvider,
     private errorHandler: ErrorHandlerProvider,
-    private logging : LoggingProvider
+    private logging : LoggingProvider,
+    public actionSheetCtrl: ActionSheetController
   ) {
     this.getCurrentCoordinates();
 
@@ -75,6 +76,22 @@ export class HomePage {
       'screen': "mapScreen",
       'action': "toggle between list to map button clicked"
     });
+  }
+
+  onLocationClicked(location: ILocation) {
+    this.actionSheetCtrl
+      .create({
+        title: location.name,
+        buttons: [
+          {
+            text: "עדכון"
+          },
+          {
+            text: "ניווט"
+          }
+        ]
+      })
+      .present();
   }
 
   getCurrentCoordinates() {

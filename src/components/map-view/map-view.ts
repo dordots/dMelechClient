@@ -25,7 +25,7 @@ export class MapViewComponent {
   @Input("centerCoords") centerCoordinates: ICoordinates;
 
   @Output() onCurrCoordsRequest = new EventEmitter();
-  @Output() onItemClicked = new EventEmitter();
+  @Output() onLocationClicked = new EventEmitter();
 
   constructor(private mapManager: MapManagerProvider) {
   }

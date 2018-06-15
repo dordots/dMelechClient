@@ -1,7 +1,6 @@
 import { IMapItem as Item } from './../../interfaces/MapItem';
 import GoogleMaps from "google-maps";
 import { Injectable, ElementRef, EventEmitter } from "@angular/core";
-import { ActionSheetController } from "ionic-angular";
 import { ICoordinates } from "../../models/Coordinates";
 import { IMap } from '../../interfaces/Map';
 
@@ -28,7 +27,7 @@ export class MapManagerProvider {
   }
   private _googleAPI: GoogleMaps.google;
 
-  constructor(public actionSheetCtrl: ActionSheetController) {
+  constructor() {
     GoogleMaps.KEY = "AIzaSyBCptJVdxT9qytWXFkm4cVfXa6qdDWOncI";
   }
 
@@ -95,19 +94,4 @@ export class MapManagerProvider {
     });
   }
 
-  // private openItemDisplay = (item: Item) => {
-  //   this.actionSheetCtrl
-  //     .create({
-  //       title: item.name,
-  //       buttons: [
-  //         {
-  //           text: "עדכון"
-  //         },
-  //         {
-  //           text: "ניווט"
-  //         }
-  //       ]
-  //     })
-  //     .present();
-  // };
 }
