@@ -67,20 +67,6 @@ export class ListViewComponent {
       soonMinyanTime: '19:24',
       lastUpdatedTime: 'לפני 8 ימים',
       distanceString: '200 מטרים'
-    },
-    {
-      synagogueName: 'בית יעקב',
-      soonMinyanType: TfilaType.EVENING,
-      soonMinyanTime: '19:20',
-      lastUpdatedTime: 'לפני 2 ימים',
-      distanceString: '403 מטרים'
-    },
-    {
-      synagogueName: 'אוהל שרה',
-      soonMinyanType: TfilaType.EVENING,
-      soonMinyanTime: '19:24',
-      lastUpdatedTime: 'לפני 8 ימים',
-      distanceString: '200 מטרים'
     }];
   }
 
