@@ -7,6 +7,7 @@ import { ILocation } from "../../models/Location";
 import { ICoordinates } from "../../models/Coordinates";
 import { LoggingProvider } from "../../providers/logging/logging"
 import { SearchPage } from "../search/search";
+import { AddPage } from "../add/add";
 
 @Component({
   selector: "page-home",
@@ -95,6 +96,15 @@ export class HomePage {
       'screen': "Home",
       'action': "list view clicked"
     });
+  }
+
+  addNewContent() {
+    this.navCtrl.push(AddPage, {}, {
+      animation: 'transition',
+      animate: true,
+      duration: 500,
+      direction: 'forward'
+    })
   }
 
   onLocationClicked(location: ILocation) {

@@ -2,8 +2,16 @@
   <ion-navbar>
     <ion-searchbar placeholder="חיפוש" class="floating-searchbar" (click)="handleStartSearch()"></ion-searchbar>
   </ion-navbar>
-    <button ion-button style="float:right;width:49%;" (click)="toggleToList()">מפה</button>
-    <button ion-button style="float:left;width:48%;" (click)="toggleToMap()">רשימה</button>
+  <ion-toolbar>
+      <ion-segment>
+        <ion-segment-button value="map" (click)="toggleToList()">
+          <ion-icon name="map"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="list" (click)="toggleToMap()">
+          <ion-icon name="list"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
 </ion-header> 
 
 <ion-content class="no-scroll">
@@ -14,7 +22,7 @@
   <list-view *ngIf="!mapMode"></list-view>
   <ion-fab right bottom>
     
-    <button ion-fab mini>      
+    <button ion-fab mini (click)="addNewContent()">      
       <ion-icon name="add"></ion-icon>      
     </button>
   </ion-fab>
