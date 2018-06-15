@@ -1,15 +1,15 @@
-import { ILocation } from "./../../models/Location";
+import { IMapItem as Item } from './../../interfaces/MapItem';
 import GoogleMaps from "google-maps";
-import { Injectable, ElementRef } from "@angular/core";
-import { ActionSheetController } from "ionic-angular";
+import { Injectable, ElementRef, EventEmitter } from "@angular/core";
 import { ICoordinates } from "../../models/Coordinates";
+import { IMap } from '../../interfaces/Map';
 
 /*
   Creating and managing maps.
 */
 @Injectable()
 export class MapManagerProvider {
-  private locationsMarkers: google.maps.Marker[] = [];
+  private itemsMarkers: google.maps.Marker[] = [];
 
   private get googleAPI() {
     let googleAPIPromise: Promise<GoogleMaps.google> = new Promise(
@@ -27,11 +27,11 @@ export class MapManagerProvider {
   }
   private _googleAPI: GoogleMaps.google;
 
-  constructor(public actionSheetCtrl: ActionSheetController) {
+  constructor() {
     GoogleMaps.KEY = "AIzaSyBCptJVdxT9qytWXFkm4cVfXa6qdDWOncI";
   }
 
-  public createMap(elementRef: ElementRef): Promise<google.maps.Map> {
+  public createMap(elementRef: ElementRef): Promise<IMap> {
     return new Promise((resolve, reject) => {
       this.googleAPI.then(googleAPI => {
         let mapOptions: google.maps.MapOptions = {
@@ -50,55 +50,48 @@ export class MapManagerProvider {
     });
   }
 
-  public setCenterCoordinates(
+  public setOnClickListener(map: IMap, eventEmitter: EventEmitter<ICoordinates>) {
+    map.addListener('click', (e: google.maps.MouseEvent) => {
+      let lat = e.latLng.lat();
+      let lng = e.latLng.lng();
+      eventEmitter.emit({ lat, lng });
+    })
+  }
+
+  public setCenterCoords(
     map: google.maps.Map,
     coords: ICoordinates
   ): void {
     if (map && coords) map.panTo(coords);
   }
 
-  public setLocations(map: google.maps.Map, locations: ILocation[]): void {
-    if (map && locations) {
+  public setItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>): void {
+    if (map && items) {
       this.removeAllMarkers(map);
-      this.addMarkersForLocations(map, locations);
+      this.addMarkersForItems(map, items, eventEmitter);
     }
   }
 
-  private removeAllMarkers(map: google.maps.Map) {
-    while (this.locationsMarkers.length) {
-      this.locationsMarkers.pop().setMap(null);
+  private removeAllMarkers(map: IMap) {
+    while (this.itemsMarkers.length) {
+      this.itemsMarkers.pop().setMap(null);
     }
   }
 
-  private addMarkersForLocations(map: google.maps.Map, locations: ILocation[]) {
+  private addMarkersForItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>) {
     this.googleAPI.then(googleAPI => {
-      locations.forEach(location => {
+      items.forEach(item => {
         let marker = new google.maps.Marker({
-          icon: `assets/imgs/${location.type}.png`,
-          position: location.coordinates,
+          icon: `assets/imgs/${item.type}.png`,
+          position: item.coordinates,
           map
         });
         marker.addListener("click", () => {
-          this.openLocationDisplay(location);
+          eventEmitter.emit(item);
         });
-        this.locationsMarkers.push(marker);
+        this.itemsMarkers.push(marker);
       });
     });
   }
 
-  private openLocationDisplay = (location: ILocation) => {
-    this.actionSheetCtrl
-      .create({
-        title: location.name,
-        buttons: [
-          {
-            text: "עדכון"
-          },
-          {
-            text: "ניווט"
-          }
-        ]
-      })
-      .present();
-  };
 }

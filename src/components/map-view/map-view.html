@@ -1,6 +1,5 @@
-<div #map id="map"></div>
-<ion-fab (click)="getCurrentPosition()" left bottom>
-    <button ion-fab mini>
-        <ion-icon name="md-locate"></ion-icon>
-    </button>
-</ion-fab>
+<map (onCurrCoordsRequest)=[onCurrCoordsRequest.emit()]
+     (onItemClicked)=[onLocationClicked.emit($event)]
+     [items]="locations"
+     [centerCoords]="centerCoordinates">
+</map>
