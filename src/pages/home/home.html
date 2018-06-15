@@ -1,12 +1,17 @@
-<ion-content class="no-scroll">
+<ion-header>
+  <ion-navbar>
+    <ion-searchbar placeholder="חיפוש" class="floating-searchbar" (click)="handleStartSearch()"></ion-searchbar>
+  </ion-navbar>
+    <button ion-button style="float:right;width:49%;" (click)="toggleToList()">מפה</button>
+    <button ion-button style="float:left;width:48%;" (click)="toggleToMap()">רשימה</button>
+</ion-header> 
+
+<ion-content class="no-scroll">     
   <map-view *ngIf="mapMode" [locations]="locations" [centerCoordinates]="centerCoordinates" (onCurrentPositionRequest)="getCurrentCoordinates()"></map-view>
   <list-view *ngIf="!mapMode"></list-view>
-  <ion-searchbar placeholder="חיפוש" class="floating-searchbar" (click)="handleStartSearch()"></ion-searchbar>
-
   <ion-fab right bottom>
     <button ion-fab mini>      
       <ion-icon name="add"></ion-icon>      
     </button>
   </ion-fab>
-
 </ion-content>
