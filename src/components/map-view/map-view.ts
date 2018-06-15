@@ -1,14 +1,4 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  EventEmitter,
-  Output,
-  AfterViewInit
-} from "@angular/core";
+import { Component, Input, EventEmitter, Output } from "@angular/core";
 import { ILocation } from "../../models/Location";
 import { ICoordinates } from "../../models/Coordinates";
 import { MapManagerProvider } from "../../providers/map-manger/map-manger";
@@ -27,7 +17,5 @@ export class MapViewComponent {
   @Output() onCurrCoordsRequest = new EventEmitter();
   @Output() onLocationClicked = new EventEmitter();
 
-  constructor(private mapManager: MapManagerProvider) {
-  }
-  
+  constructor(private mapManager: MapManagerProvider) {}
 }
