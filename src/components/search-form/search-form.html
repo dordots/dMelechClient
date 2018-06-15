@@ -1,7 +1,7 @@
-<!-- Generated template for the SearchFormComponent component -->
 <div>
-  <coordinates-picker
-    [centerCoords]="centerCoords"
-    (onMapClicked)="onMapClicked($event)"
-  ></coordinates-picker>
+  <div>
+    <span>בחירת מיקום...</span>
+    <coordinates-picker [centerCoords]="centerCoords" (onMapClicked)="onMapClicked($event)">
+    </coordinates-picker>
+  </div>
 </div>
