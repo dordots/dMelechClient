@@ -1,15 +1,10 @@
-import { CoordinatesPickerComponent } from './../../components/coordinates-picker/coordinates-picker';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the SearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * Search occurs in this page.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',

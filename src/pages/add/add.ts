@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 /**
  * add new synagogue/ lesson / mikve
  */
 
-@IonicPage()
 @Component({
   selector: 'page-add',
   templateUrl: 'add.html',
