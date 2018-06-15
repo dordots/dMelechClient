@@ -6,6 +6,7 @@ import { NavController, ActionSheetController } from "ionic-angular";
 import { ILocation } from "../../models/Location";
 import { ICoordinates } from "../../models/Coordinates";
 import { LoggingProvider } from "../../providers/logging/logging"
+import { SearchPage } from "../search/search";
 
 @Component({
   selector: "page-home",
@@ -14,8 +15,8 @@ import { LoggingProvider } from "../../providers/logging/logging"
 export class HomePage {
   mapMode: boolean = true;
   locations: ILocation[] = [];
-  centerCoordinates: ICoordinates;
-
+  centerCoordinates: ICoordinates;  
+ 
   constructor(
     public navCtrl: NavController,
     public locationTrack: LocationTrackProvider,
@@ -70,11 +71,29 @@ export class HomePage {
       } as IYeshiva
     ];
   }
-  toggle_view_options() {
-    this.mapMode = !this.mapMode;
+
+  handleStartSearch() {
+    this.navCtrl.push(SearchPage, {}, {
+      animation: 'transition',
+      animate: true,
+      duration: 500,
+      direction: 'forward'
+    })
+  }
+
+  toggleToMap() {
+    this.mapMode = false;
     this.logging.info({
-      'screen': "mapScreen",
-      'action': "toggle between list to map button clicked"
+      'screen': "Home",
+      'action': "map view clicked"
+    });
+  }
+
+  toggleToList(){
+    this.mapMode = true;
+    this.logging.info({
+      'screen': "Home",
+      'action': "list view clicked"
     });
   }
 
