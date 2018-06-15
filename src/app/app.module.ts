@@ -43,7 +43,7 @@ import { LoggingProvider } from '../providers/logging/logging';
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LocationTrackProvider,
-    DatesToStringProvider
+    DatesToStringProvider,
     ToastProvider,
     ErrorHandlerProvider,
     MapManagerProvider,
