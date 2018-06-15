@@ -15,4 +15,8 @@ export class SearchFormComponent {
   constructor() {
   }
 
+  onMapClicked(coords: ICoordinates) {
+    debugger;
+  }
+
 }
