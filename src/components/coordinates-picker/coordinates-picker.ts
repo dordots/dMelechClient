@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ILocation } from '../../models/Location';
+import { ICoordinates } from '../../models/Coordinates';
 
 /**
- * Generated class for the CoordinatesPickerComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
+ * Component that enables picking coordinates from a map.
  */
 @Component({
   selector: 'coordinates-picker',
@@ -12,11 +11,11 @@ import { Component } from '@angular/core';
 })
 export class CoordinatesPickerComponent {
 
-  text: string;
+  @Input("centerCoords") centerCoords: ICoordinates;
+
+  @Output("onMapClicked") onMapClicked = new EventEmitter();
 
   constructor() {
-    console.log('Hello CoordinatesPickerComponent Component');
-    this.text = 'Hello World';
   }
 
 }

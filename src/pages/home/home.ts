@@ -16,7 +16,7 @@ import { AddPage } from "../add/add";
 export class HomePage {
   mapMode: boolean = true;
   locations: ILocation[] = [];
-  centerCoordinates: ICoordinates;  
+  centerCoords: ICoordinates;  
  
   constructor(
     public navCtrl: NavController,
@@ -126,7 +126,7 @@ export class HomePage {
   getCurrentCoordinates() {
     this.locationTrack
       .getCurrentCoordinates()
-      .then(coords => (this.centerCoordinates = coords))
+      .then(coords => (this.centerCoords = coords))
       .catch(err => this.errorHandler.error(err));
   }
 }

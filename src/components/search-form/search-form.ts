@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ICoordinates } from '../../models/Coordinates';
 
 /**
- * Generated class for the SearchFormComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
+ * Creating search query by form and emits it on submit.
  */
 @Component({
   selector: 'search-form',
@@ -12,11 +10,9 @@ import { Component } from '@angular/core';
 })
 export class SearchFormComponent {
 
-  text: string;
+  @Input("centerCoords") centerCoords: ICoordinates;
 
   constructor() {
-    console.log('Hello SearchFormComponent Component');
-    this.text = 'Hello World';
   }
 
 }

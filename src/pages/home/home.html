@@ -16,7 +16,7 @@
 
 <ion-content class="no-scroll">
   <map-view *ngIf="mapMode" 
-    [locations]="locations" [centerCoords]="centerCoordinates"
+    [locations]="locations" [centerCoords]="centerCoords"
     (onCurrCoordsRequest)="getCurrentCoordinates()" 
     (onLocationClicked)=[onLocationClicked($event)]></map-view>
   <list-view *ngIf="!mapMode"></list-view>

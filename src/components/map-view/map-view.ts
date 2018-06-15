@@ -22,7 +22,7 @@ import { MapManagerProvider } from "../../providers/map-manger/map-manger";
 })
 export class MapViewComponent {
   @Input("locations") locations: ILocation[] = [];
-  @Input("centerCoords") centerCoordinates: ICoordinates;
+  @Input("centerCoords") centerCoords: ICoordinates;
 
   @Output() onCurrCoordsRequest = new EventEmitter();
   @Output() onLocationClicked = new EventEmitter();
