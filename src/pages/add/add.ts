@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
  * add new synagogue/ lesson / mikve
- *
  */
 
 @IonicPage()
@@ -14,10 +13,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class AddPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddPage');
   }
 
 }
