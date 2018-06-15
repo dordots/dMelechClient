@@ -19,13 +19,15 @@ import { MapManagerProvider } from '../providers/map-manger/map-manger';
 import { NgxLogglyModule } from 'ngx-loggly-logger';
 import { BackendApiProvider } from '../providers/backend-api/backend-api';
 import { LoggingProvider } from '../providers/logging/logging';
+import { AddPage } from '../pages/add/add';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    SearchPage
+    SearchPage,
+    AddPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { LoggingProvider } from '../providers/logging/logging';
     MyApp,
     HomePage,
     ListPage,
-    SearchPage
+    SearchPage,
+    AddPage
   ],
   providers: [
     StatusBar,
