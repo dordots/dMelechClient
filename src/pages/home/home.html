@@ -14,7 +14,7 @@
     </ion-toolbar>
 </ion-header> 
 
-<ion-content class="no-scroll">
+<ion-content>
   <map-view *ngIf="mapMode" 
     [locations]="locations" [centerCoords]="centerCoordinates"
     (onCurrCoordsRequest)="getCurrentCoordinates()" 
