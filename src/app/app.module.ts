@@ -20,6 +20,7 @@ import { NgxLogglyModule } from 'ngx-loggly-logger';
 import { BackendApiProvider } from '../providers/backend-api/backend-api';
 import { LoggingProvider } from '../providers/logging/logging';
 import { AddPage } from '../pages/add/add';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AddPage } from '../pages/add/add';
     ErrorHandlerProvider,
     MapManagerProvider,
     BackendApiProvider,
-    LoggingProvider
+    LoggingProvider,
+    LaunchNavigator
   ]
 })
 export class AppModule {}
