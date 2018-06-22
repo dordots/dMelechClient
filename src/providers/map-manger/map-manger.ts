@@ -1,8 +1,8 @@
-import { IMapItem as Item } from './../../interfaces/MapItem';
+import { IMapItem as Item } from "./../../interfaces/MapItem";
 import GoogleMaps from "google-maps";
 import { Injectable, ElementRef, EventEmitter } from "@angular/core";
 import { ICoordinates } from "../../models/Coordinates";
-import { IMap } from '../../interfaces/Map';
+import { IMap } from "../../interfaces/Map";
 
 /*
   Creating and managing maps.
@@ -42,30 +42,41 @@ export class MapManagerProvider {
         };
         if (elementRef.nativeElement.childElementCount == 0) {
           resolve(new google.maps.Map(elementRef.nativeElement, mapOptions));
-        }
-        else {
+        } else {
           resolve(null);
         }
       });
     });
   }
 
-  public setOnClickListener(map: IMap, eventEmitter: EventEmitter<ICoordinates>) {
-    map.addListener('click', (e: google.maps.MouseEvent) => {
+  public setOnClickListener(
+    map: IMap,
+    eventEmitter: EventEmitter<ICoordinates>
+  ) {
+    map.addListener("click", (e: google.maps.MouseEvent) => {
       let lat = e.latLng.lat();
       let lng = e.latLng.lng();
       eventEmitter.emit({ lat, lng });
-    })
+    });
   }
 
-  public setCenterCoords(
-    map: google.maps.Map,
-    coords: ICoordinates
-  ): void {
+  public setMapOptions(map: IMap, options: IMapOptions) {
+    if (map && options) {
+      let cursorCSS: keyof IMapOptions = "cursorCSS";
+      if (options[cursorCSS]) map.setOptions({draggableCursor: options[cursorCSS]});
+      else map.setOptions({draggableCursor: null});
+    }
+  }
+
+  public setCenterCoords(map: google.maps.Map, coords: ICoordinates): void {
     if (map && coords) map.panTo(coords);
   }
 
-  public setItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>): void {
+  public setItems(
+    map: IMap,
+    items: Item[],
+    eventEmitter: EventEmitter<Item>
+  ): void {
     if (map && items) {
       this.removeAllMarkers(map);
       this.addMarkersForItems(map, items, eventEmitter);
@@ -78,7 +89,11 @@ export class MapManagerProvider {
     }
   }
 
-  private addMarkersForItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>) {
+  private addMarkersForItems(
+    map: IMap,
+    items: Item[],
+    eventEmitter: EventEmitter<Item>
+  ) {
     this.googleAPI.then(googleAPI => {
       items.forEach(item => {
         let marker = new google.maps.Marker({
@@ -93,5 +108,8 @@ export class MapManagerProvider {
       });
     });
   }
+}
 
+export interface IMapOptions {
+  cursorCSS?: 'default' | 'crosshair';
 }

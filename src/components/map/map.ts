@@ -2,7 +2,7 @@ import { IMapItem } from './../../interfaces/MapItem';
 import { Component, Output, EventEmitter, Input, ElementRef, ViewChild, SimpleChanges } from '@angular/core';
 import { ICoordinates } from '../../models/Coordinates';
 import { IMap } from '../../interfaces/Map';
-import { MapManagerProvider } from '../../providers/map-manger/map-manger';
+import { MapManagerProvider, IMapOptions } from '../../providers/map-manger/map-manger';
 
 /**
  * Components that contains map,
@@ -21,6 +21,7 @@ export class MapComponent<T extends IMapItem> {
 
   @Input("items") items: T[] = [];
   @Input("centerCoords") centerCoords: ICoordinates;
+  @Input("mapOptions") mapOptions: IMapOptions = {};
   
   @ViewChild("mapElement") mapElement: ElementRef;
 
@@ -55,6 +56,16 @@ export class MapComponent<T extends IMapItem> {
     let centerCoordsPropName: keyof MapComponent<T> = "centerCoords";
     if (changes[centerCoordsPropName])
       this.goToCoordinates();
+          
+    let mapOptionsPropName: keyof MapComponent<T> = "mapOptions";
+    if (changes[mapOptionsPropName])
+      this.setMapOptions();
+  }
+
+  private setMapOptions() {
+    if (this.mapOptions) {
+      this.map.then(map => this.mapManager.setMapOptions(map, this.mapOptions));
+    }
   }
 
   private goToCoordinates(coords? : ICoordinates) {
