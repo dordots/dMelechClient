@@ -11,24 +11,29 @@ export interface ILocation extends IEntity, IMapItem {
     /** @prop The type should be overrided in inherit objects */
     type: string;
 
+    /** @prop The address of the location in wrods. */
+    address: string;
+
     /** @prop The coordinates of the location */
     coordinates: ICoordinates;
 
     /** @prop Additional properties about the location. */
-    additionalProperties: { [key: string]: string | number };
-
-    /** @prop Is the location is active (not in shiputzim for example) */
-    isActive?: boolean;
-
-    /** @prop Is the location is temporary (will not display without relevant events) */
-    isTemporary?: boolean;
+    externals: { [key: string]: boolean };
 
     /** @prop The events that associated with the location */
     events: IEvent[];
 }
 
 export interface ISynagogue extends ILocation {
-    type: 'synagogue'
+    
+    type: 'synagogue';
+
+    external?: { 
+        disabled_access: boolean,
+        mikve: boolean,
+        parking: boolean,
+        shtiblach: boolean
+     };
 }
 
 export interface IYeshiva extends ILocation {
