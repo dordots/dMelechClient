@@ -49,10 +49,7 @@ export class MapManagerProvider {
     });
   }
 
-  public setOnClickListener(
-    map: IMap,
-    eventEmitter: EventEmitter<ICoordinates>
-  ) {
+  public setOnClickListener(map: IMap, eventEmitter: EventEmitter<ICoordinates>) {
     map.addListener("click", (e: google.maps.MouseEvent) => {
       let lat = e.latLng.lat();
       let lng = e.latLng.lng();
@@ -72,11 +69,7 @@ export class MapManagerProvider {
     if (map && coords) map.panTo(coords);
   }
 
-  public setItems(
-    map: IMap,
-    items: Item[],
-    eventEmitter: EventEmitter<Item>
-  ): void {
+  public setItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>): void {
     if (map && items) {
       this.removeAllMarkers(map);
       this.addMarkersForItems(map, items, eventEmitter);
@@ -89,11 +82,7 @@ export class MapManagerProvider {
     }
   }
 
-  private addMarkersForItems(
-    map: IMap,
-    items: Item[],
-    eventEmitter: EventEmitter<Item>
-  ) {
+  private addMarkersForItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>) {
     this.googleAPI.then(googleAPI => {
       items.forEach(item => {
         let marker = new google.maps.Marker({

@@ -1,36 +1,25 @@
 import { ICoordinates } from './../models/Coordinates';
 import { IGeoBox } from './../models/GeoBox';
 import { ILocation } from '../models/Location';
-
-/** The main interface for search queries */
-export interface ISearchQuery {
-
-    /** @prop Additional properties such as accessability etc. */
-    properties?: { [key: string]: string | boolean };
-}
+import { DaysOfWeek } from '../models/Event';
 
 /** Query of locations */
-export interface IGeoRectangleQuery extends ISearchQuery {
+export interface IGeoBoxQuery {
     geoBox: IGeoBox;
-    searchTimeSpan: TimeSpanQuery;
 }
 
 /** Query of events */
-export interface IAdvancedQuery extends ISearchQuery {
-    byRadius: RadiusQuery;
-    searchTimeSpan: TimeSpanQuery;
-    text?: string;
+export interface IAdvancedQuery extends  Partial<ILocation> {
 
-    /** @prop Additional properties such as accessability etc. */
-    locationProperties?: ILocation;
-}
+    namme: string;
+    address: string;
 
-export type RadiusQuery = {
-    center: ICoordinates
-    radius: number;
-}
-
-export type TimeSpanQuery = {
-    start: Date;
-    end: Date;
+    // between 0 to 25
+    radius: [number, number];
+    coordinates: ICoordinates;
+    
+    time: [string, string];
+    
+    externals: { [key: string]: boolean };
+    days: DaysOfWeek[];
 }
