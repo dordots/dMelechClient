@@ -1,19 +1,70 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>מסך הוספה</ion-title>
+    <ion-title>הוסף בית כנסת</ion-title>
   </ion-navbar>
-  <ion-toolbar>
-      <ion-segment>
-        <ion-segment-button value="map">
-          בית כנסת
-        </ion-segment-button>
-        <ion-segment-button value="list">
-          שיעור
-        </ion-segment-button>
-      </ion-segment>
-    </ion-toolbar>
-</ion-header>
+ </ion-header>
 
-<ion-content padding>
+<ion-content padding style="text-align:center;" dir="rtl" >
+  
+  <ion-item>
+    <ion-input name="name" placeholder="שם בית כנסת"></ion-input>
+  </ion-item>
 
+  <ion-item>
+    <ion-input start name="address" placeholder="כתובת"></ion-input>
+  </ion-item>
+
+  <ion-item >
+    <ion-label>נוסח  </ion-label>
+    <ion-select name="nosach">
+      <ion-option value="SFARD">ספרד</ion-option>
+      <ion-option value="ASHKENAZ">אשכנז</ion-option>
+      <ion-option value="A_M">עדות מזרח</ion-option>
+   </ion-select>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+        <ion-col ion-item no-lines>  
+            <ion-label>מקווה</ion-label>
+            <ion-checkbox name="mikve"></ion-checkbox>
+          </ion-col>
+          <ion-col ion-item no-lines>  
+              <ion-label>חניה</ion-label>
+              <ion-checkbox name="hanaya"></ion-checkbox>
+            </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col ion-item no-lines>  
+            <ion-label>נגישות</ion-label>
+            <ion-checkbox name="negishut"></ion-checkbox>
+          </ion-col>
+          <ion-col ion-item no-lines>  
+              <ion-label>שטיבלך</ion-label>
+              <ion-checkbox name="shtiblach"></ion-checkbox>
+            </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item no-lines  style="text-align:center;" >
+      <button ion-button round padding [color]="daysInWeek[key]" *ngFor="let key of keys" (click)="toggleDay(key)">{{key}}</button>
+  </ion-item>
+    
+  <ion-item>
+    <ion-input start name="tel" placeholder="טלפון"></ion-input>
+  </ion-item>
+
+  <ion-item no-lines style="text-align:center;">
+      <button ion-button outline icon-start>
+      <ion-icon name="add"></ion-icon>
+      הוסף מניין
+    </button>
+    
+    <button ion-button outline icon-start>
+        <ion-icon name="add"></ion-icon>
+        הוסף תמונה
+      </button>
+    </ion-item>
+
+    <button ion-button >הוסף</button>
 </ion-content>
