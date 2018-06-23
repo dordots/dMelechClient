@@ -1,7 +1,8 @@
+import { Range } from './Range';
+import { Time } from './Time';
 import { ICoordinates } from './../models/Coordinates';
-import { IGeoBox } from './../models/GeoBox';
-import { ILocation } from '../models/Location';
-import { DaysOfWeek } from '../models/Event';
+import { IGeoBox } from './../interfaces/GeoBox';
+import { DaysOfWeek } from "../interfaces/DaysOfWeek";
 
 /** Query of locations */
 export interface IGeoBoxQuery {
@@ -9,17 +10,18 @@ export interface IGeoBoxQuery {
 }
 
 /** Query of events */
-export interface IAdvancedQuery extends  Partial<ILocation> {
+export interface IAdvancedQuery {
 
-    namme: string;
+    name: string;
     address: string;
 
     // between 0 to 25
-    radius: [number, number];
+    radius: Range<number>;
     coordinates: ICoordinates;
     
-    time: [string, string];
+    time: Range<Time>;
     
     externals: { [key: string]: boolean };
     days: DaysOfWeek[];
 }
+

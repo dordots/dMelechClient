@@ -1,7 +1,10 @@
-<div>
-  <div>
-    <span>בחירת מיקום...</span>
-    <coordinates-picker [centerCoords]="centerCoords" (onMapClicked)="onMapClicked($event)">
-    </coordinates-picker>
-  </div>
-</div>
+<form [formGroup]="todo" (ngSubmit)="logForm()">
+  <ion-item>
+    <ion-label>Todo</ion-label>
+    <ion-input type="text" formControlName="title"></ion-input>
+  </ion-item>
+</form>
+
+<!-- <span>בחירת מיקום...</span>
+<coordinates-picker [centerCoords]="centerCoords" (onMapClicked)="onMapClicked($event)">
+</coordinates-picker> -->
