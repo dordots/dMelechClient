@@ -11,5 +11,5 @@ export function Validate(coords: ICoordinates): boolean {
 }
 
 export function ValidateRange(range: Range<ICoordinates>): boolean {
-    return (Validate(range["0"]) && Validate(range["1"]));
+    return (range && Validate(range["0"]) && Validate(range["1"]));
 }

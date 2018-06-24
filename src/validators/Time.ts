@@ -12,5 +12,5 @@ export function Validate(time: Time): boolean {
 }
 
 export function ValidateRange(range: Range<Time>): boolean {
-    return (Validate(range["0"]) && Validate(range["1"]));
+    return (range && Validate(range["0"]) && Validate(range["1"]));
 }

@@ -1,10 +1,41 @@
-<form [formGroup]="todo" (ngSubmit)="logForm()">
-  <ion-item>
-    <ion-label>Todo</ion-label>
-    <ion-input type="text" formControlName="title"></ion-input>
+<form [formGroup]="query" (ngSubmit)="onSubmit()">
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>שם</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>כתובת</ion-label>
+        <ion-input type="text" formControlName="address"></ion-input>
+        <button (click)="onCoordsRequest()" item-end ion-button clear small>
+          <ion-icon name="pin"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-item dir="ltr">
+    <ion-range dualKnobs="true" min="1" max="25" [(ngModel)]="radiusRange" formControlName="range">
+      <ion-label range-left small>1</ion-label>
+      <ion-label range-right>25</ion-label>
+    </ion-range>
   </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>החל מ-</ion-label>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="start"></ion-datetime>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label>עד ל-</ion-label>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="end"></ion-datetime>
+      </ion-item>
+    </ion-col>
+  </ion-row>
 </form>
-
-<!-- <span>בחירת מיקום...</span>
-<coordinates-picker [centerCoords]="centerCoords" (onMapClicked)="onMapClicked($event)">
-</coordinates-picker> -->

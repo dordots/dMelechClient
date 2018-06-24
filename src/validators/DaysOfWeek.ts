@@ -9,9 +9,9 @@ export function Validate(day: DaysOfWeek): boolean {
 }
 
 export function ValidateRange(range: Range<DaysOfWeek>): boolean {
-    return (Validate(range["0"]) && Validate(range["1"]));
+    return (range && Validate(range["0"]) && Validate(range["1"]));
 }
 
 export function ValidateArray(array: Array<DaysOfWeek>): boolean {
-  return (array.every(Validate));
+  return (array && array.filter && array.filter(Validate).length > array.length);
 }

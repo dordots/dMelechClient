@@ -1,5 +1,3 @@
-import { ISearchQuery } from './../../interfaces/SearchQueries';
-import { IEvent } from './../../models/Event';
 import { ILocation } from './../../models/Location';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -33,7 +31,7 @@ export class BackendApiProvider {
     return this.http.delete<ILocation>(`${this.baseAPIUrl}/locations/${locationId}`);    
   }
 
-  searchLocations(query: ISearchQuery) {
+  searchLocations(query: IAdvancedQuery) {
     return this.http.get<ILocation>(`${this.baseAPIUrl}/locations/search`, {
       params: {
         filter: JSON.stringify(query)
