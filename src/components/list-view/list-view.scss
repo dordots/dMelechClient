@@ -1,2 +1,10 @@
-list-view {
+list-view {  
+    .disable-button-click .button-clear-md:hover:not(.disable-hover) {
+            background-color: transparent;
+    }
+
+    .disable-button-click .activated {
+        background-color: transparent;
+    }
+
 }
