@@ -11,6 +11,12 @@
         <ion-icon name="pin"></ion-icon>
       </button>
     </ion-item>
+    <ion-item dir="rtl">
+      <ion-label>נוסח</ion-label>
+      <ion-select formControlName="nosach">
+        <ion-option *ngFor="let nosach of nosachTypes" [value]="nosach">{{ nosach }}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item dir="ltr">
       <ion-range min="1" max="25" pin="true" formControlName="radius">
         <ion-label range-left>1</ion-label>

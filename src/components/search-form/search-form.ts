@@ -1,3 +1,4 @@
+import { NosachType } from './../../models/Location';
 import { ICoordinates } from './../../models/Coordinates';
 import { CoordinatesPickerComponent } from './../coordinates-picker/coordinates-picker';
 import { ModalController } from 'ionic-angular';
@@ -20,6 +21,7 @@ import { ValidateArray as ValidateDaysOfWeekArray } from '../../validators/DaysO
 export class SearchFormComponent {
 
   public query: FormGroup;
+  public nosachTypes: NosachType[] = ['תימן', 'עדות המזרח', 'ספרד', 'אשכנז'];
   
   constructor(private formBuilder: FormBuilder,
               public modalCtrl: ModalController) {
@@ -32,6 +34,7 @@ export class SearchFormComponent {
       radius: ['', this.getValidator(ValidateRadius, 'invalidRadius')],
       start: [''],
       end: [''],
+      nosach: [''],
     });
 
     const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
@@ -45,13 +48,18 @@ export class SearchFormComponent {
       coordinates: {},
       radius: 1,
       start: localISOTime,
-      end: localISOTime
+      end: localISOTime,
+      nosach: ''
     });
 
   }
 
   onSubmit() {
-    
+    let convertQuery = this.convertQuery();
+  }
+
+  convertQuery() {
+    return null;
   }
 
   getValidator(Validator: (val) => boolean, errorName: string) {
