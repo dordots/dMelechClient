@@ -1,8 +1,19 @@
-import { IMapItem } from './../../interfaces/MapItem';
-import { Component, Output, EventEmitter, Input, ElementRef, ViewChild, SimpleChanges } from '@angular/core';
-import { ICoordinates } from '../../models/Coordinates';
-import { IMap } from '../../interfaces/Map';
-import { MapManagerProvider, IMapOptions } from '../../providers/map-manger/map-manger';
+import { ICoordinates } from "./../../models/Coordinates";
+import { IMapItem } from "./../../interfaces/MapItem";
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  ElementRef,
+  ViewChild,
+  SimpleChanges
+} from "@angular/core";
+import { IMap } from "../../interfaces/Map";
+import {
+  MapManagerProvider,
+  IMapOptions
+} from "../../providers/map-manger/map-manger";
 
 /**
  * Components that contains map,
@@ -10,11 +21,10 @@ import { MapManagerProvider, IMapOptions } from '../../providers/map-manger/map-
  * and throws some map events.
  */
 @Component({
-  selector: 'map',
-  templateUrl: 'map.html'
+  selector: "map",
+  templateUrl: "map.html"
 })
 export class MapComponent<T extends IMapItem> {
-
   @Output() onCurrCoordsRequest = new EventEmitter();
   @Output() onItemClicked = new EventEmitter<T>();
   @Output() onMapClicked = new EventEmitter<ICoordinates>();
@@ -22,7 +32,7 @@ export class MapComponent<T extends IMapItem> {
   @Input("items") items: T[] = [];
   @Input("centerCoords") centerCoords: ICoordinates;
   @Input("mapOptions") mapOptions: IMapOptions = {};
-  
+
   @ViewChild("mapElement") mapElement: ElementRef;
 
   // The map instance
@@ -32,16 +42,16 @@ export class MapComponent<T extends IMapItem> {
     return this.mapManager.createMap(this.mapElement).then(map => {
       this._map = this._map || map; // avoid recreating map
       return this._map;
-    })
-  };
-
-  constructor(private mapManager: MapManagerProvider) {
+    });
   }
 
+  constructor(private mapManager: MapManagerProvider) {}
 
   ngAfterViewInit() {
-    this.map.then(map => this.mapManager.setOnClickListener(map, this.onMapClicked))
-    
+    this.map.then(map =>
+      this.mapManager.setOnClickListener(map, this.onMapClicked)
+    );
+
     if (!this.centerCoords) {
       // Temple mount fallback start point
       this.goToCoordinates({ lat: 31.778139, lng: 35.235987 });
@@ -50,16 +60,13 @@ export class MapComponent<T extends IMapItem> {
 
   ngOnChanges(changes: SimpleChanges) {
     let itemPropName: keyof MapComponent<T> = "items";
-    if (changes[itemPropName])
-      this.setItems();
-    
+    if (changes[itemPropName]) this.setItems();
+
     let centerCoordsPropName: keyof MapComponent<T> = "centerCoords";
-    if (changes[centerCoordsPropName])
-      this.goToCoordinates();
-          
+    if (changes[centerCoordsPropName]) this.goToCoordinates();
+
     let mapOptionsPropName: keyof MapComponent<T> = "mapOptions";
-    if (changes[mapOptionsPropName])
-      this.setMapOptions();
+    if (changes[mapOptionsPropName]) this.setMapOptions();
   }
 
   private setMapOptions() {
@@ -68,14 +75,18 @@ export class MapComponent<T extends IMapItem> {
     }
   }
 
-  private goToCoordinates(coords? : ICoordinates) {
-    if (coords || this.centerCoords) // first go to given coords, otherwise to input coordinates
-      this.map.then(map => this.mapManager.setCenterCoords(map, coords || this.centerCoords));
+  private goToCoordinates(coords?: ICoordinates) {
+    if (coords || this.centerCoords)
+      // first go to given coords, otherwise to input coordinates
+      this.map.then(map =>
+        this.mapManager.setCenterCoords(map, coords || this.centerCoords)
+      );
   }
 
   private setItems() {
     if (this.items)
-      this.map.then(map => this.mapManager.setItems(map, this.items, this.onItemClicked));
+      this.map.then(map =>
+        this.mapManager.setItems(map, this.items, this.onItemClicked)
+      );
   }
-  
 }

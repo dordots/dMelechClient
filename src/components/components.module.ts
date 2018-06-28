@@ -14,6 +14,9 @@ import { CoordinatesPickerComponent } from "./coordinates-picker/coordinates-pic
     SearchFormComponent,
     CoordinatesPickerComponent
   ],
+  entryComponents: [
+    CoordinatesPickerComponent
+  ],
   imports: [IonicModule],
   exports: [
     MapViewComponent,

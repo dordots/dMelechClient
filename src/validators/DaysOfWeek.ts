@@ -13,5 +13,5 @@ export function ValidateRange(range: Range<DaysOfWeek>): boolean {
 }
 
 export function ValidateArray(array: Array<DaysOfWeek>): boolean {
-  return (array && array.filter && array.filter(Validate).length > array.length);
+  return (array && array.filter && array.filter(Validate).length == array.length);
 }

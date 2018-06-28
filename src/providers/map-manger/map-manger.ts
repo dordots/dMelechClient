@@ -84,9 +84,9 @@ export class MapManagerProvider {
 
   private addMarkersForItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>) {
     this.googleAPI.then(googleAPI => {
-      items.forEach(item => {
+      items.filter(item => item.coordinates).forEach(item => {
         let marker = new google.maps.Marker({
-          icon: `assets/imgs/${item.type}.png`,
+          icon: item.type ? `assets/imgs/${item.type}.png` : undefined,
           position: item.coordinates,
           map
         });

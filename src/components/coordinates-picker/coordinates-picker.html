@@ -1,4 +1,14 @@
-<map (onMapClicked)=[onMapClicked.emit($event)]
-     [centerCoords]="centerCoords"
-     [mapOptions]="mapOptions">
-</map>
+
+<ion-content>
+    <map (onMapClicked)=[onCoordsSelect($event)]
+         [centerCoords]="centerCoords"
+         [items]="[selectedCoords]"
+         [mapOptions]="mapOptions">
+    </map>
+</ion-content>
+<ion-footer>
+    <ion-buttons>
+        <button ion-button (click)="onDismiss()">ביטול</button>
+        <button ion-button (click)="onSubmit()">אישור</button>
+    </ion-buttons>
+</ion-footer>

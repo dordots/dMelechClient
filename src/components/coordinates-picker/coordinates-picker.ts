@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ICoordinates } from '../../models/Coordinates';
+import { ViewController } from 'ionic-angular';
+import { IMapItem } from './../../interfaces/MapItem';
+import { ICoordinates } from './../../models/Coordinates';
+import { Component } from '@angular/core';
 import { IMapOptions } from '../../providers/map-manger/map-manger';
 
 /**
@@ -11,15 +13,34 @@ import { IMapOptions } from '../../providers/map-manger/map-manger';
 })
 export class CoordinatesPickerComponent {
 
-  @Input("centerCoords") centerCoords: ICoordinates;
-
-  @Output("onMapClicked") onMapClicked = new EventEmitter();
-
+  centerCoords: ICoordinates = null;
+  selectedCoords: IMapItem = {
+    coordinates: null
+  };
   mapOptions: IMapOptions = {
     cursorCSS: 'crosshair'
   }
 
-  constructor() {
+  constructor(private viewCtrl: ViewController) {
+
+  }
+
+  onCoordsSelect(selectedCoords: ICoordinates) {
+    this.selectedCoords = {
+      coordinates: selectedCoords
+    };
+  }
+
+  onSubmit() {
+    if (!this.selectedCoords.coordinates) {
+      alert("לא נבחר מיקום");
+      return;
+    }
+    this.viewCtrl.dismiss(this.selectedCoords.coordinates);
+  }
+
+  onDismiss() {
+    this.viewCtrl.dismiss();
   }
 
 }

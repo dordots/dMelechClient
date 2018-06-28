@@ -1,6 +1,10 @@
 coordinates-picker {
+  
+  .scroll-content {
+    overflow-y: auto;
+  }
 
-    #mapElement {
-        cursor: crosshair;
-    }
+  ion-footer {
+    text-align: left;
+  }
 }

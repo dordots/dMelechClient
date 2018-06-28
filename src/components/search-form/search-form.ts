@@ -1,12 +1,12 @@
-import { Time } from './../../interfaces/Time';
-import { DaysOfWeek } from './../../interfaces/DaysOfWeek';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { ICoordinates } from './../../models/Coordinates';
+import { CoordinatesPickerComponent } from './../coordinates-picker/coordinates-picker';
+import { ModalController } from 'ionic-angular';
+import { FormGroup, FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
 import { IAdvancedQuery, } from "./../../interfaces/SearchQueries";
 import { Component } from "@angular/core";
-import { ICoordinates } from "../../models/Coordinates";
 
 // validators
-import { ValidateRange as ValidateRadiusRange } from '../../validators/Radius'
+import { Validate as ValidateRadius } from '../../validators/Radius'
 import { Validate as ValidateCoordinates } from '../../validators/Coordinates'
 import { ValidateArray as ValidateDaysOfWeekArray } from '../../validators/DaysOfWeek'
 
@@ -20,19 +20,18 @@ import { ValidateArray as ValidateDaysOfWeekArray } from '../../validators/DaysO
 export class SearchFormComponent {
 
   public query: FormGroup;
-  public radiusRange = { lower: 5, upper: 20 };
   
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              public modalCtrl: ModalController) {
     this.query = this.formBuilder.group({
       address: [''],
-      coordinates: ['', ValidateCoordinates],
-      days: ['', ValidateDaysOfWeekArray],
+      coordinates: ['', this.getValidator(ValidateCoordinates, 'invalidCoordinates')],
+      days: ['', this.getValidator(ValidateDaysOfWeekArray, 'invalidDaysArray')],
       externals: [''],
       name: [''],
-      radius: ['', ValidateRadiusRange],
+      radius: ['', this.getValidator(ValidateRadius, 'invalidRadius')],
       start: [''],
       end: [''],
-      range: ['']
     });
 
     const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
@@ -40,39 +39,42 @@ export class SearchFormComponent {
 
     this.query.setValue({
       externals: {},
-      days: [],
+      days: [1, 2],
       address: '',
       name: '',
       coordinates: {},
-      radius: [],
+      radius: 1,
       start: localISOTime,
-      end: localISOTime,
-      range: {}
+      end: localISOTime
     });
 
   }
 
   onSubmit() {
-
-  }
-
-
-  onCoordsRequest() {
-
-  }
-  
-  onDayToggle(day: DaysOfWeek) {
     
   }
-  
-  onExternalToggle(external: string) {
-    
-  }
-  
-  private onCoordinatesRecieved(coords: ICoordinates) {
-    if (coords && coords.lat && coords.lng) {
-      let centerPropName: keyof Partial<IAdvancedQuery> = "coordinates";
-     //this.searchQuery.setValue({ centerPropName: coords }); 
+
+  getValidator(Validator: (val) => boolean, errorName: string) {
+    return (formControl: FormControl) => {
+      const val = formControl.value;
+      if (!Validator(val)) {
+        return { [errorName]: true };
+      }
+      return null;
     }
   }
+
+  onCoordsRequest() {
+    let coordsPickerModal = this.modalCtrl.create(CoordinatesPickerComponent, {}, {
+      enterAnimation: 'modal-md-slide-in'
+    });
+
+    coordsPickerModal.onDidDismiss((coordinates: ICoordinates) => {
+      if (coordinates) {
+        this.query.controls["coordinates"].setValue(coordinates);
+      }
+    });
+    coordsPickerModal.present();
+  }
+  
 }
