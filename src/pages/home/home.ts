@@ -17,6 +17,7 @@ export class HomePage {
   mapMode: boolean = true;
   locations: ILocation[] = [];
   centerCoords: ICoordinates;  
+  activeTab: string;
  
   constructor(
     public navCtrl: NavController,
@@ -25,6 +26,7 @@ export class HomePage {
     private logging : LoggingProvider,
     public actionSheetCtrl: ActionSheetController
   ) {
+    this.activeTab = 'map';
     this.getCurrentCoordinates();
 
     this.locations = [
@@ -83,15 +85,15 @@ export class HomePage {
   }
 
   toggleToMap() {
-    this.mapMode = false;
+    this.activeTab = 'map';
     this.logging.info({
       'screen': "Home",
-      'action': "map view clicked"
+      'action': "map view clicked "
     });
   }
 
   toggleToList(){
-    this.mapMode = true;
+    this.activeTab = 'list';
     this.logging.info({
       'screen': "Home",
       'action': "list view clicked"

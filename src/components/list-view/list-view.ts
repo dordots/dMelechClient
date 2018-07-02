@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
-import { DatesToStringProvider } from '../../providers/dates-to-string/dates-to-string'
+import { DatesToStringProvider } from '../../providers/dates-to-string/dates-to-string';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
+
 
 enum TfilaType {
   MORNING = 'שחרית',
@@ -16,7 +18,7 @@ enum TfilaType {
 export class ListViewComponent {
   SynagogueList: any;
 
-  constructor(public datesToString: DatesToStringProvider) {     
+  constructor(public datesToString: DatesToStringProvider, private launchnavigator: LaunchNavigator) {
     let dateOfMinyan = new Date('June 8, 2018 03:24:00');
 
     this.SynagogueList = [{
@@ -70,5 +72,32 @@ export class ListViewComponent {
     }];
   }
 
+  carNavigation() {
+    //TODO - INSERT CORRECT ADDRESS
+    this.launchnavigator.navigate("TEL AVIV, ISRAEL", {
+      transportMode: this.launchnavigator.TRANSPORT_MODE.DRIVING,
+      appSelection: {
+        dialogHeaderText: "באיזה תוכנה תרצו לנווט?",
+        cancelButtonText: "ביטול",
+        rememberChoice: {
+          enabled: false
+        }
+      }
+    });
+  }
+
+  walkingNavigation() {
+    //TODO - INSERT CORRECT ADDRESS
+    this.launchnavigator.navigate("TEL AVIV, ISRAEL", {
+      transportMode: this.launchnavigator.TRANSPORT_MODE.WALKING,
+      appSelection: {
+        dialogHeaderText: "באיזה תוכנה תרצו לנווט?",
+        cancelButtonText: "ביטול",
+        rememberChoice: {
+          enabled: false
+        }
+      }
+    });
+  }
 
 }

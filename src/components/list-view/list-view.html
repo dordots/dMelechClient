@@ -1,31 +1,33 @@
-<ion-content>
+<ion-content scroll="true">
   <ion-card *ngFor="let synagogue of SynagogueList">
     <ion-card-content>
-        <ion-card-title>
-            {{synagogue.synagogueName}}
-            </ion-card-title>
-          <p>
-            תפילת {{synagogue.soonMinyanType}}
-            תחל בשעה: {{synagogue.soonMinyanTime}}
-          </p>
+      <ion-card-title>
+        {{synagogue.synagogueName}}
+      </ion-card-title>
+      <p>
+        תפילת {{synagogue.soonMinyanType}} תחל בשעה: {{synagogue.soonMinyanTime}}
+      </p>
+      <p>
+        מרחק: {{synagogue.distanceString}}
+      </p>
     </ion-card-content>
-      <ion-row >
-      <ion-col>
+    <ion-row>
+      <ion-col class="disable-button-click">
         <button ion-button icon-left clear small>
           <ion-icon name="clock"></ion-icon>
           <div>{{synagogue.lastUpdatedTime}}</div>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button icon-left clear small>
-          <ion-icon name="map"></ion-icon>
-          <div>{{synagogue.distanceString}}</div>
+        <button ion-button icon-left clear small (click)="walkingNavigation()">
+          <ion-icon name="walk"></ion-icon>
+          <div>ניווט ברגל</div>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button icon-left clear small>
+        <button ion-button icon-left clear small (click)="carNavigation()">
           <ion-icon name="navigate"></ion-icon>
-          <div>נווט</div>
+          <div>ניווט ברכב</div>
         </button>
       </ion-col>
     </ion-row>

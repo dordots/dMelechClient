@@ -3,25 +3,25 @@
     <ion-searchbar placeholder="חיפוש" class="floating-searchbar" (click)="handleStartSearch()"></ion-searchbar>
   </ion-navbar>
   <ion-toolbar>
-      <ion-segment>
-        <ion-segment-button value="map" (click)="toggleToList()">
+      <ion-segment [(ngModel)]="activeTab">
+        <ion-segment-button value="map" (click)="toggleToMap()">
           <ion-icon name="map"></ion-icon>
         </ion-segment-button>
-        <ion-segment-button value="list" (click)="toggleToMap()">
+        <ion-segment-button value="list" (click)="toggleToList()">
           <ion-icon name="list"></ion-icon>
         </ion-segment-button>
       </ion-segment>
     </ion-toolbar>
-</ion-header> 
+</ion-header>
 
-<ion-content class="no-scroll">
-  <map-view *ngIf="mapMode" 
+<ion-content>
+  <map-view *ngIf="activeTab != 'list'" 
     [locations]="locations" [centerCoords]="centerCoords"
     (onCurrCoordsRequest)="getCurrentCoordinates()" 
     (onLocationClicked)=[onLocationClicked($event)]></map-view>
-  <list-view *ngIf="!mapMode"></list-view>
-  <ion-fab right bottom>
-    
+  <list-view *ngIf="activeTab === 'list'"></list-view>
+  
+  <ion-fab right bottom>    
     <button ion-fab mini (click)="addNewContent()">      
       <ion-icon name="add"></ion-icon>      
     </button>
