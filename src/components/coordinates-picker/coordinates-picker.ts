@@ -32,6 +32,10 @@ export class CoordinatesPickerComponent {
     const recievedCoords = this.viewCtrl.data.centerCoords
     if (ValidateCoords(recievedCoords)) {
       this.selectedCoords.coordinates = recievedCoords;
+      this.centerCoords = recievedCoords;
+    }
+    else {
+      this.moveToCurrentCoordinates();
     }
   }
 
@@ -53,11 +57,12 @@ export class CoordinatesPickerComponent {
     this.viewCtrl.dismiss();
   }
 
-  getCurrentCoordinates() {
+  moveToCurrentCoordinates() {
     this.locationTrack
       .getCurrentCoordinates()
       .then(coords => {
-        this.currentLocation = coords
+        this.currentLocation = coords;
+        this.centerCoords = coords;
       })
       .catch(err => this.errorHandler.error(err));
   }

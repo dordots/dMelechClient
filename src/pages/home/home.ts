@@ -28,7 +28,12 @@ export class HomePage {
     public actionSheetCtrl: ActionSheetController
   ) {
     this.activeTab = 'map';
-    this.getCurrentCoordinates();
+    this.moveToCurrentCoordinates();
+    this.locationTrack.getCurrentCoordinatesSub().subscribe(
+      coords => {
+        this.currentLocation = coords;
+      }
+    );
 
     this.locations = [
       {
@@ -126,10 +131,13 @@ export class HomePage {
       .present();
   }
 
-  getCurrentCoordinates() {
+  moveToCurrentCoordinates() {
     this.locationTrack
       .getCurrentCoordinates()
-      .then(coords => (this.currentLocation = coords))
+      .then(coords => {
+        this.currentLocation = coords;
+        this.centerCoords = coords;
+      })
       .catch(err => this.errorHandler.error(err));
   }
 }

@@ -1,7 +1,7 @@
 
 <ion-content>
     <map (onMapClicked)=[onCoordsSelect($event)]
-         (onCurrCoordsRequest)="getCurrentCoordinates()"
+         (onCurrCoordsRequest)="moveToCurrentCoordinates()"
          [centerCoords]="centerCoords"
          [currentLocation]="currentLocation"
          [items]="[selectedCoords]"
