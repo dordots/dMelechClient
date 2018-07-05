@@ -7,7 +7,8 @@ import { MapComponent } from './map/map';
 @NgModule({
 	declarations: [MapViewComponent,
     ListViewComponent,
-    MapComponent],
+    MapComponent,
+    ],
 	imports: [IonicModule],
 	exports: [MapViewComponent,
 	ListViewComponent,

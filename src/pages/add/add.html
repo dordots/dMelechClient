@@ -45,22 +45,18 @@
             </ion-col>
     </ion-row>
   </ion-grid>
-
-  <ion-item no-lines  style="text-align:center;" >
-      <button ion-button round padding [color]="daysInWeek[key]" *ngFor="let key of keys" (click)="toggleDay(key)">{{key}}</button>
-  </ion-item>
     
   <ion-item>
     <ion-input start name="tel" placeholder="טלפון"></ion-input>
   </ion-item>
 
   <ion-item no-lines style="text-align:center;">
-      <button ion-button outline icon-start>
+      <button ion-button outline icon-start (click)="showModal()">
       <ion-icon name="add"></ion-icon>
       הוסף מניין
     </button>
     
-    <button ion-button outline icon-start>
+    <button ion-button outline icon-start  (click)="presentPrompt()">
         <ion-icon name="add"></ion-icon>
         הוסף תמונה
       </button>

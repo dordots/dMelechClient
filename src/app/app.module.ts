@@ -21,6 +21,7 @@ import { BackendApiProvider } from '../providers/backend-api/backend-api';
 import { LoggingProvider } from '../providers/logging/logging';
 import { AddPage } from '../pages/add/add';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { AddMinyanComponent } from '../components/add-minyan/add-minyan'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
     HomePage,
     ListPage,
     SearchPage,
+    AddMinyanComponent,
     AddPage
   ],
   imports: [
@@ -42,6 +44,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
     HomePage,
     ListPage,
     SearchPage,
+    AddMinyanComponent,
     AddPage
   ],
   providers: [

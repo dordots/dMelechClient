@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { AddMinyanComponent } from '../../components/add-minyan/add-minyan';
 /**
  * add new synagogue/ lesson / mikve
  */
@@ -12,18 +12,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddPage {
 
-  private daysInWeek : any;
-  private keys : any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.daysInWeek  =  { 'א': "light", 'ב': "light",'ג': "light",'ד': "light",'ה': "light",'ו': "light",'ז': "light",}
-    this.keys = Object.keys(this.daysInWeek);
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private modalCtrl : ModalController) {
+    
   }
 
-
-  toggleDay(key : string) {
-    this.daysInWeek[key]= (this.daysInWeek[key] == "light") ? "primary" : "light" ;
+  showModal() {
+    let timepickModal = this.modalCtrl.create(AddMinyanComponent);
+    timepickModal.present();
   }
-
-
+  
 }

@@ -1,0 +1,27 @@
+<ion-content padding>
+
+  <ion-item >
+    <ion-label>תפילת</ion-label>
+    <ion-select name="name">
+      <ion-option value="SHAHARIT">שחרית</ion-option>
+      <ion-option value="MINHA">מנחה</ion-option>
+      <ion-option value="ARVIT">ערבית</ion-option>
+      <ion-option value="MUSAF">מוסף</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item no-lines style="text-align:center;" >
+      <button ion-button round padding [color]="daysInWeek[key]" *ngFor="let key of keys" (click)="toggleDay(key)">{{key}}</button>
+  </ion-item>
+  
+  <ion-item>
+   <ion-label>שעה</ion-label>
+   <ion-datetime displayFormat="HH:mm" ></ion-datetime>
+  </ion-item>
+  
+  <ion-item no-lines style="text-align:center;">
+   <button ion-button >הוסף</button>
+   <button ion-button >בטל</button>
+</ion-item>
+
+</ion-content>
