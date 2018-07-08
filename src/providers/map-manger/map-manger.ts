@@ -9,7 +9,11 @@ import { IMap } from "../../interfaces/Map";
 */
 @Injectable()
 export class MapManagerProvider {
+  map: google.maps.Map;
+  placesService: google.maps.places.PlacesService;
+  autocompleteService: google.maps.places.AutocompleteService; 
   private itemsMarkers: google.maps.Marker[] = [];
+  
 
   private get googleAPI() {
     let googleAPIPromise: Promise<GoogleMaps.google> = new Promise(
@@ -29,6 +33,7 @@ export class MapManagerProvider {
 
   constructor() {
     GoogleMaps.KEY = "AIzaSyBCptJVdxT9qytWXFkm4cVfXa6qdDWOncI";
+    GoogleMaps.LIBRARIES = ["places"];
   }
 
   public createMap(elementRef: ElementRef): Promise<IMap> {
@@ -41,7 +46,9 @@ export class MapManagerProvider {
           center: { lat: 31.776725, lng: 35.234514 }
         };
         if (elementRef.nativeElement.childElementCount == 0) {
-          resolve(new google.maps.Map(elementRef.nativeElement, mapOptions));
+          this.map = new google.maps.Map(elementRef.nativeElement, mapOptions);
+          this.placesService = new google.maps.places.PlacesService(this.map);
+          resolve(this.map);
         } else {
           resolve(null);
         }
@@ -95,6 +102,23 @@ export class MapManagerProvider {
         });
         this.itemsMarkers.push(marker);
       });
+    });
+  }
+
+  public searchPlace(searchString: string, callBack: any) {
+    if(!this.autocompleteService){
+      this.autocompleteService = new google.maps.places.AutocompleteService();
+    }
+    let req :google.maps.places.AutocompletionRequest = {input : searchString};
+    this.autocompleteService.getPlacePredictions(req, callBack);
+  }
+
+  public setLocation(place: google.maps.places.AutocompletePrediction){
+    let req: google.maps.places.PlaceDetailsRequest = {placeId: place.place_id};
+    this.placesService.getDetails(req, (place: any, status: any) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        this.setCenterCoords(this.map, place.geometry.location);        
+      }
     });
   }
 }

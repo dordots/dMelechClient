@@ -10,6 +10,7 @@ import { Component } from "@angular/core";
 import { Validate as ValidateRadius } from '../../validators/Radius'
 import { Validate as ValidateCoordinates } from '../../validators/Coordinates'
 import { ValidateArray as ValidateDaysOfWeekArray } from '../../validators/DaysOfWeek'
+import { IMapItem } from '../../interfaces/MapItem';
 
 /**
  * Creating search query by form and emits it on submit.

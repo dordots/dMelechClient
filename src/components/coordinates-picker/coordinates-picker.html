@@ -1,14 +1,21 @@
-
 <ion-content>
-    <map (onMapClicked)=[onCoordsSelect($event)]
-         [centerCoords]="centerCoords"
-         [items]="[selectedCoords]"
-         [mapOptions]="mapOptions">
-    </map>
+  <ion-navbar>
+    <ion-searchbar placeholder="חיפוש" class="floating-searchbar" (ionInput)="searchLocation($event)"></ion-searchbar>
+    <ion-list *ngIf="showResultList">
+            <ion-item *ngFor="let location of locationsResult">
+              <span (click)=setLocation(location)>{{ location.description }}</span>
+            </ion-item>     
+          </ion-list>
+  </ion-navbar>
+  <map  (onMapClicked)=[onCoordsSelect($event)] 
+        [centerCoords]="centerCoords" 
+        [items]="[selectedCoords]" 
+        [mapOptions]="mapOptions">
+  </map>
 </ion-content>
 <ion-footer>
-    <ion-buttons>
-        <button ion-button (click)="onDismiss()">ביטול</button>
-        <button ion-button (click)="onSubmit()">אישור</button>
-    </ion-buttons>
+  <ion-buttons>
+    <button ion-button (click)="onDismiss()">ביטול</button>
+    <button ion-button (click)="onSubmit()">אישור</button>
+  </ion-buttons>
 </ion-footer>
