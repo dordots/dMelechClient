@@ -1,8 +1,8 @@
 import { ViewController } from 'ionic-angular';
 import { IMapItem } from './../../interfaces/MapItem';
-import { ICoordinates } from './../../models/Coordinates';
 import { Component } from '@angular/core';
 import { IMapOptions, MapManagerProvider } from '../../providers/map-manger/map-manger';
+import { ICoordinates } from '../../models/Coordinates';
 
 /**
  * Component that enables picking coordinates from a map.
@@ -29,9 +29,19 @@ export class CoordinatesPickerComponent {
   }
 
   onCoordsSelect(selectedCoords: ICoordinates) {
-    this.selectedCoords = {
-      coordinates: selectedCoords
-    };
+    this.mapManager.getAddressByCoordinates(selectedCoords, (places: any[], status: google.maps.places.PlacesServiceStatus) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK && places && places.length) {
+        this.selectedCoords = {
+          address : places[0].name,
+          coordinates : selectedCoords
+        }       
+      }
+      else{
+        this.selectedCoords = {
+          coordinates : selectedCoords
+        }  
+      }
+    });
   }
 
   onSubmit() {
@@ -39,7 +49,7 @@ export class CoordinatesPickerComponent {
       alert("לא נבחר מיקום");
       return;
     }
-    this.viewCtrl.dismiss(this.selectedCoords.coordinates);
+    this.viewCtrl.dismiss(this.selectedCoords);
   }
 
   onDismiss() {
@@ -59,7 +69,6 @@ export class CoordinatesPickerComponent {
         }
       });
     } else {
-
       this.showResultList = false;
     }
   }

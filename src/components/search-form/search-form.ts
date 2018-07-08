@@ -1,3 +1,4 @@
+import { IMapItem } from './../../interfaces/MapItem';
 import { NosachType } from './../../models/Location';
 import { ICoordinates } from './../../models/Coordinates';
 import { CoordinatesPickerComponent } from './../coordinates-picker/coordinates-picker';
@@ -10,7 +11,6 @@ import { Component } from "@angular/core";
 import { Validate as ValidateRadius } from '../../validators/Radius'
 import { Validate as ValidateCoordinates } from '../../validators/Coordinates'
 import { ValidateArray as ValidateDaysOfWeekArray } from '../../validators/DaysOfWeek'
-import { IMapItem } from '../../interfaces/MapItem';
 
 /**
  * Creating search query by form and emits it on submit.
@@ -78,9 +78,12 @@ export class SearchFormComponent {
       enterAnimation: 'modal-md-slide-in'
     });
 
-    coordsPickerModal.onDidDismiss((coordinates: ICoordinates) => {
-      if (coordinates) {
-        this.query.controls["coordinates"].setValue(coordinates);
+    coordsPickerModal.onDidDismiss((mapItem: IMapItem) => {
+      if (mapItem) {
+        this.query.controls["coordinates"].setValue(mapItem.coordinates);
+        if (mapItem.address){
+          this.query.controls["address"].setValue(mapItem.address);
+        }
       }
     });
     coordsPickerModal.present();

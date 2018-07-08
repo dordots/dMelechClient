@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-navbar>
+  <ion-navbar> 
     <ion-searchbar placeholder="חיפוש" class="floating-searchbar" (ionInput)="searchLocation($event)"></ion-searchbar>
     <ion-list *ngIf="showResultList">
             <ion-item *ngFor="let location of locationsResult">

@@ -10,4 +10,7 @@ export interface IMapItem {
 
     /** @prop The coordinates of the location */
     coordinates: ICoordinates;
+
+    /** @prop The coordinates of the location */
+    address?: string;
 }

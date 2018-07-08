@@ -115,11 +115,17 @@ export class MapManagerProvider {
 
   public setLocation(place: google.maps.places.AutocompletePrediction){
     let req: google.maps.places.PlaceDetailsRequest = {placeId: place.place_id};
-    this.placesService.getDetails(req, (place: any, status: any) => {
+    this.placesService.getDetails(req, (place: any, status: google.maps.places.PlacesServiceStatus) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         this.setCenterCoords(this.map, place.geometry.location);        
       }
     });
+  }
+
+  public getAddressByCoordinates(Coordinates: ICoordinates, callBack: any){
+    let latLng = new google.maps.LatLng(Coordinates.lat, Coordinates.lng);
+    let req: google.maps.places.PlaceSearchRequest = {location: latLng, radius: .1};
+    this.placesService.nearbySearch(req, callBack);
   }
 }
 
