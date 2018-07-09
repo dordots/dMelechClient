@@ -12,7 +12,7 @@ import { AddMinyanComponent } from '../../components/add-minyan/add-minyan';
 })
 export class AddPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private modalCtrl : ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl : ModalController) {
     
   }
 
