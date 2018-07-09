@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { NavController, NavParams , ModalController} from 'ionic-angular';
 import { AddMinyanComponent } from '../../components/add-minyan/add-minyan';
+
 /**
  * add new synagogue/ lesson / mikve
  */
 
-@IonicPage()
 @Component({
   selector: 'page-add',
   templateUrl: 'add.html',

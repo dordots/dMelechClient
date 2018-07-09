@@ -6,7 +6,7 @@ import { ICoordinates } from "../models/Coordinates";
 export interface IMapItem {
     
     /** @prop The type of the item */
-    type: string;
+    type?: string;
 
     /** @prop The coordinates of the location */
     coordinates: ICoordinates;

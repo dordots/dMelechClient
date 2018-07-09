@@ -1,0 +1,62 @@
+<ion-content>
+  <form [formGroup]="query">
+    <ion-item>
+      <ion-label>שם</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>כתובת</ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+      <button (click)="onCoordsRequest()" item-end ion-button clear small>
+        <ion-icon name="pin"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item dir="rtl">
+      <ion-label>נוסח</ion-label>
+      <ion-select formControlName="nosach">
+        <ion-option *ngFor="let nosach of nosachTypes" [value]="nosach">{{ nosach }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item dir="ltr">
+      <ion-range min="1" max="25" pin="true" formControlName="radius">
+        <ion-label range-left>1</ion-label>
+        <ion-label range-right>25</ion-label>
+      </ion-range>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>החל מ-</ion-label>
+          <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="start"></ion-datetime>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>עד ל-</ion-label>
+          <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="end"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label>מקווה</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>חניה</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>נגישות לנכים</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>שטיבלך</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button (click)="onSubmit()">חיפוש</button>
+  </ion-toolbar>
+</ion-footer>

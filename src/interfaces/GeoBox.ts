@@ -1,4 +1,4 @@
-import { ICoordinates } from './Coordinates';
+import { ICoordinates } from '../models/Coordinates';
 
 export interface IGeoBox {
 

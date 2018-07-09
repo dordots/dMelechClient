@@ -15,8 +15,8 @@
 </ion-header>
 
 <ion-content>
-  <map-view *ngIf="!activeTab || activeTab === 'map'" 
-    [locations]="locations" [centerCoords]="centerCoordinates"
+  <map-view *ngIf="activeTab != 'list'" 
+    [locations]="locations" [centerCoords]="centerCoords"
     (onCurrCoordsRequest)="getCurrentCoordinates()" 
     (onLocationClicked)=[onLocationClicked($event)]></map-view>
   <list-view *ngIf="activeTab === 'list'"></list-view>
