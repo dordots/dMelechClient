@@ -1,8 +1,11 @@
+import { LocationTrackProvider } from './../../providers/location-track/location-track';
 import { ViewController } from 'ionic-angular';
 import { IMapItem } from './../../interfaces/MapItem';
 import { ICoordinates } from './../../models/Coordinates';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IMapOptions } from '../../providers/map-manger/map-manger';
+import { Validate as ValidateCoords } from '../../validators/Coordinates';
+import { ErrorHandlerProvider } from '../../providers/error-handler/error-handler';
 
 /**
  * Component that enables picking coordinates from a map.
@@ -13,7 +16,9 @@ import { IMapOptions } from '../../providers/map-manger/map-manger';
 })
 export class CoordinatesPickerComponent {
 
-  centerCoords: ICoordinates = null;
+  centerCoords: ICoordinates;
+  currentLocation: ICoordinates;
+  
   selectedCoords: IMapItem = {
     coordinates: null
   };
@@ -21,8 +26,13 @@ export class CoordinatesPickerComponent {
     cursorCSS: 'crosshair'
   }
 
-  constructor(private viewCtrl: ViewController) {
-
+  constructor(private viewCtrl: ViewController,
+              private locationTrack: LocationTrackProvider,
+              private errorHandler: ErrorHandlerProvider) {
+    const recievedCoords = this.viewCtrl.data.centerCoords
+    if (ValidateCoords(recievedCoords)) {
+      this.selectedCoords.coordinates = recievedCoords;
+    }
   }
 
   onCoordsSelect(selectedCoords: ICoordinates) {
@@ -41,6 +51,15 @@ export class CoordinatesPickerComponent {
 
   onDismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  getCurrentCoordinates() {
+    this.locationTrack
+      .getCurrentCoordinates()
+      .then(coords => {
+        this.currentLocation = coords
+      })
+      .catch(err => this.errorHandler.error(err));
   }
 
 }

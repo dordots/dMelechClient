@@ -13,6 +13,7 @@ import { MapManagerProvider } from "../../providers/map-manger/map-manger";
 export class MapViewComponent {
   @Input("locations") locations: ILocation[] = [];
   @Input("centerCoords") centerCoords: ICoordinates;
+  @Input("currentLocation") currentLocation: ICoordinates;
 
   @Output() onCurrCoordsRequest = new EventEmitter();
   @Output() onLocationClicked = new EventEmitter();

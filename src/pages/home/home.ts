@@ -18,6 +18,7 @@ export class HomePage {
   locations: ILocation[] = [];
   centerCoords: ICoordinates;  
   activeTab: string;
+  currentLocation: ICoordinates; 
  
   constructor(
     public navCtrl: NavController,
@@ -128,7 +129,7 @@ export class HomePage {
   getCurrentCoordinates() {
     this.locationTrack
       .getCurrentCoordinates()
-      .then(coords => (this.centerCoords = coords))
+      .then(coords => (this.currentLocation = coords))
       .catch(err => this.errorHandler.error(err));
   }
 }

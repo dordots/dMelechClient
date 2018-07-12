@@ -57,6 +57,6 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <button ion-button (click)="onSubmit()">חיפוש</button>
+    <button ion-button [disabled]="!isQueryValid()" (click)="onSubmit()">חיפוש</button>
   </ion-toolbar>
 </ion-footer>

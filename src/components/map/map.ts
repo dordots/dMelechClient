@@ -31,6 +31,7 @@ export class MapComponent<T extends IMapItem> {
 
   @Input("items") items: T[] = [];
   @Input("centerCoords") centerCoords: ICoordinates;
+  @Input("currentLocation") currentLocation: ICoordinates;
   @Input("mapOptions") mapOptions: IMapOptions = {};
 
   @ViewChild("mapElement") mapElement: ElementRef;
@@ -65,6 +66,9 @@ export class MapComponent<T extends IMapItem> {
     let centerCoordsPropName: keyof MapComponent<T> = "centerCoords";
     if (changes[centerCoordsPropName]) this.goToCoordinates();
 
+    let currentLocationPropName: keyof MapComponent<T> = "currentLocation";
+    if (changes[currentLocationPropName]) this.setCurrentLocation();
+
     let mapOptionsPropName: keyof MapComponent<T> = "mapOptions";
     if (changes[mapOptionsPropName]) this.setMapOptions();
   }
@@ -78,8 +82,16 @@ export class MapComponent<T extends IMapItem> {
   private goToCoordinates(coords?: ICoordinates) {
     if (coords || this.centerCoords)
       // first go to given coords, otherwise to input coordinates
-      this.map.then(map =>
-        this.mapManager.setCenterCoords(map, coords || this.centerCoords)
+      this.map.then(map => 
+          this.mapManager.setCenterCoords(map, coords || this.centerCoords)
+      );
+  }
+
+  private setCurrentLocation() {
+    if (this.currentLocation)
+      // first go to given coords, otherwise to input coordinates
+      this.map.then(map => 
+          this.mapManager.setCurrentLocation(map, this.currentLocation)
       );
   }
 

@@ -59,21 +59,36 @@ export class SearchFormComponent {
   }
 
   convertQuery() {
+    if (this.isQueryValid()) {
+
+    }
+
     return null;
   }
 
-  getValidator(Validator: (val) => boolean, errorName: string) {
+  isQueryValid() {
+    return this.query.valid;
+  }
+
+  getValidator(Validator: (val) => boolean, errorName: string, orOtherField?: string) {
     return (formControl: FormControl) => {
+
       const val = formControl.value;
       if (!Validator(val)) {
-        return { [errorName]: true };
+        if (!orOtherField) {
+          return { [errorName]: true };
+        }
+        else {
+        }
       }
       return null;
     }
   }
 
   onCoordsRequest() {
-    let coordsPickerModal = this.modalCtrl.create(CoordinatesPickerComponent, {}, {
+    let coordsPickerModal = this.modalCtrl.create(CoordinatesPickerComponent, {
+      centerCoords: this.query.controls["coordinates"].value
+    }, {
       enterAnimation: 'modal-md-slide-in'
     });
 

@@ -10,6 +10,7 @@ import { IMap } from "../../interfaces/Map";
 @Injectable()
 export class MapManagerProvider {
   private itemsMarkers: google.maps.Marker[] = [];
+  private currentLocation: google.maps.Marker;
 
   private get googleAPI() {
     let googleAPIPromise: Promise<GoogleMaps.google> = new Promise(
@@ -67,6 +68,21 @@ export class MapManagerProvider {
 
   public setCenterCoords(map: google.maps.Map, coords: ICoordinates): void {
     if (map && coords) map.panTo(coords);
+  }
+
+  public setCurrentLocation(map: google.maps.Map, coords: ICoordinates): void {
+    if (map && coords) {
+      if (this.currentLocation) {
+        this.currentLocation.setMap(null);
+      }
+
+      this.currentLocation = new google.maps.Marker({
+        icon: "assets/imgs/currLoc.png",
+        position: coords,
+        map
+      });
+      map.panTo(coords);
+    } 
   }
 
   public setItems(map: IMap, items: Item[], eventEmitter: EventEmitter<Item>): void {
