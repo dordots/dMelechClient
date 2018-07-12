@@ -4,7 +4,7 @@ import { CoordinatesPickerComponent } from './../coordinates-picker/coordinates-
 import { ModalController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
 import { IAdvancedQuery, } from "./../../interfaces/SearchQueries";
-import { Component } from "@angular/core";
+import { Component, Output, EventEmitter } from "@angular/core";
 
 // validators
 import { Validate as ValidateRadius } from '../../validators/Radius'
@@ -23,6 +23,8 @@ export class SearchFormComponent {
   public query: FormGroup;
   public nosachTypes: NosachType[] = ['תימן', 'עדות המזרח', 'ספרד', 'אשכנז'];
   
+  @Output() onSearchSubmit = new EventEmitter();
+
   constructor(private formBuilder: FormBuilder,
               public modalCtrl: ModalController) {
     this.query = this.formBuilder.group({
@@ -55,10 +57,11 @@ export class SearchFormComponent {
   }
 
   onSubmit() {
-    let convertQuery = this.convertQuery();
+    let convertedQuery = this.convertFormToSearchQuery();
+    this.onSearchSubmit.emit(convertedQuery);
   }
 
-  convertQuery() {
+  convertFormToSearchQuery() {
     return null;
   }
 
