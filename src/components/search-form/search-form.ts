@@ -62,7 +62,9 @@ export class SearchFormComponent {
   }
 
   convertFormToSearchQuery() {
-    return null;
+    return {
+      coordinates: this.query.controls["coordinates"].value
+    };
   }
 
   getValidator(Validator: (val) => boolean, errorName: string) {

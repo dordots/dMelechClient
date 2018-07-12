@@ -31,8 +31,8 @@ export class BackendApiProvider {
     return this.http.delete<ILocation>(`${this.baseAPIUrl}/locations/${locationId}`);    
   }
 
-  searchLocations(query: IAdvancedQuery) {
-    return this.http.get<ILocation>(`${this.baseAPIUrl}/locations/search`, {
+  search(query: IAdvancedQuery) {
+    return this.http.get<ILocation[]>(`${this.baseAPIUrl}/locations/search`, {
       params: {
         filter: JSON.stringify(query)
       }
