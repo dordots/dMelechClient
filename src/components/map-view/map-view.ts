@@ -15,7 +15,7 @@ export class MapViewComponent {
   @Input("centerCoords") centerCoords: ICoordinates;
   @Input("currentLocation") currentLocation: ICoordinates;
 
-  @Output() onCurrCoordsRequest = new EventEmitter();
+  @Output() onMoveToCurrCoordsRequest = new EventEmitter();
   @Output() onLocationClicked = new EventEmitter();
 
   constructor(private mapManager: MapManagerProvider) {}

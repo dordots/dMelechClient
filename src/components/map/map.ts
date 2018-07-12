@@ -25,7 +25,7 @@ import {
   templateUrl: "map.html"
 })
 export class MapComponent<T extends IMapItem> {
-  @Output() onCurrCoordsRequest = new EventEmitter();
+  @Output() onMoveToCurrCoordsRequest = new EventEmitter();
   @Output() onItemClicked = new EventEmitter<T>();
   @Output() onMapClicked = new EventEmitter<ICoordinates>();
 
